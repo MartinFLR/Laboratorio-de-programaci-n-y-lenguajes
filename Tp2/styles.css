@@ -1,0 +1,50 @@
+html{
+	font-family: Verdana;
+}
+.acercadeBody{
+	background-color: black;
+	color: white;
+}
+
+header, h1{
+    font-weight: bold; 
+    text-align: center;
+}
+
+.firstSection{
+	display:flex;
+	justify-content: center;
+	text-align:center;
+}
+
+.secondSection{
+	display:flex;
+	justify-content: center;
+}
+
+.conoceMasHref {
+  margin-bottom: 10px;
+}
+
+
+.firstArticle{
+	width: 50%;
+	text-align:center;
+}
+
+.secondtArticle{
+	width: 50%;
+}
+img{
+	object-fit: fill;
+	width: 100%;
+	height: 100%;
+}
+.volverImg{
+	width: 10%;
+	height: 10%;
+}
+.volverContainer{
+	display:flex;
+	justify-content: center;
+}
