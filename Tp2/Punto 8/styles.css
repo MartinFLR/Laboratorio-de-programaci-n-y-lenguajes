@@ -1,0 +1,26 @@
+header{
+	justify-content:center;
+	text-align:center;
+}
+
+.formContainer{
+	display:flex;
+	width:100%;
+	height:100%;
+	justify-content:center;
+	align-items:center;
+}
+
+
+li{
+	width:50%;
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
+
+uo{
+	width:50%;
+	list-style-type:none;
+	justify-content:center;
+	text-align:center
+}
