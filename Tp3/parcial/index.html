@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio1</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <header>
+      <h1>Adivina el numero</h1>
+    </header>
+    <section class="resolucionSection">
+      <article>
+        <h2>Ingresa un numero de 0 a 100</h2>
+        <label >
+          <input id="numEntrada" type="number" placeholder="Ingresa un numero">
+        </label>
+
+          <button id="adivinar" onclick="onAdivinar()">Adivinar</button>
+
+          <button id="rendirse" onclick="onRendirse()">Rendirse</button>
+
+          <button id="jugar" onclick="onJugar()">Jugar</button>
+
+        <p>Nro. de intento: </p>
+
+          <input class="inputRespuestas" type="number" value="0" id="numIntentos">
+
+
+        <p>Resultado</p>
+        <p>El numero es el</p>
+          <input class="inputRespuestas"  type="text" value="" id="resultado">
+      </article>
+    </section>
+
+</body>
+<script type="text/javascript">
+    let NUM_INTENTOS_ELEMENT = document.getElementById('numIntentos');
+    let RESULTADO_ELEMENT = document.getElementById('resultado');
+    let randomNum = Math.floor(Math.random() * 101);
+
+
+    function onAdivinar() {
+        let numIntentosActual = Number(NUM_INTENTOS_ELEMENT.value);
+        NUM_INTENTOS_ELEMENT.value = numIntentosActual + 1;
+        const NUM_ELEMENT = document.getElementById('numEntrada');
+        let numero = Number(NUM_ELEMENT.value);
+        alert("Tu numero fue: " + numero)
+
+        switch (true) {
+            case numero === randomNum:{
+                let stringActual = String(RESULTADO_ELEMENT.textContent)
+                stringActual = "Felicitaciones Acertaste!"
+                RESULTADO_ELEMENT.value = stringActual;
+                break
+            }
+            case numero > randomNum:{
+
+                let stringActual = String(RESULTADO_ELEMENT.textContent)
+                stringActual = "Estas cerca!, tu numero elegido es mas grande"
+                RESULTADO_ELEMENT.value = stringActual;
+                break
+            }
+            case numero < randomNum:{
+                let stringActual = String(RESULTADO_ELEMENT.textContent)
+                stringActual = "Estas cerca!, tu numero elegido es mas pequeño"
+                RESULTADO_ELEMENT.value = stringActual;
+                break
+            }
+        }
+        isDerrota(numIntentosActual);
+    }
+
+    function onRendirse() {
+        let numActivarDerrota = 3;
+        isDerrota(numActivarDerrota);
+    }
+
+    function isDerrota(numIntentosActual){
+        if(numIntentosActual > 2 ) {
+            alert("Perdiste, el numero secreto era: "+ randomNum)
+            NUM_INTENTOS_ELEMENT.value = numIntentosActual = 0;
+            alert("Contador reiniciado")
+            let stringActual = String(RESULTADO_ELEMENT.textContent)
+            stringActual = ""
+            RESULTADO_ELEMENT.value = stringActual;
+        }
+    }
+
+</script>
+</html>

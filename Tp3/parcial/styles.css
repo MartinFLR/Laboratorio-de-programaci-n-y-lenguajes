@@ -1,0 +1,9 @@
+body{
+    background-color: brown;
+}
+input{
+    width: 400px;
+}
+.inputRespuestas{
+    border:none;
+}
