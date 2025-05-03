@@ -1,7 +1,7 @@
 let arregloRandomNum = [];
 let arregloContainer;
 let botonGenerar, botonesContainer, resultadoContainer;
-let botonSumaDeTodosLosElementos, botonPrimeroYUltimo,
+let botonNum, botonPrimeroYUltimo,
     botonMenorYMayor, botonEsta5, botonOrdenamientoMayorYMenor,
     botonPromedio;
 let numResultado = 0;
@@ -19,12 +19,12 @@ function generar(){
     }
     arregloContainer.innerHTML = arregloRandomNum;
 
-    botonSumaDeTodosLosElementos = document.createElement("input");
-    botonSumaDeTodosLosElementos.setAttribute("type", "button")
-    botonSumaDeTodosLosElementos.setAttribute("id","botonSumaDeTodosLosElementos");
-    botonSumaDeTodosLosElementos.setAttribute("value", "Suma de todos los elementos");
-    botonSumaDeTodosLosElementos.addEventListener("click", sumaDeTodosLosElementos)
-    botonesContainer.appendChild(botonSumaDeTodosLosElementos);
+    botonNum = document.createElement("input");
+    botonNum.setAttribute("type", "button")
+    botonNum.setAttribute("id","botonSumaDeTodosLosElementos");
+    botonNum.setAttribute("value", "Suma de todos los elementos");
+    botonNum.addEventListener("click", sumaDeTodosLosElementos)
+    botonesContainer.appendChild(botonNum);
 
     botonPrimeroYUltimo = document.createElement("input");
     botonPrimeroYUltimo.setAttribute("type", "button")
