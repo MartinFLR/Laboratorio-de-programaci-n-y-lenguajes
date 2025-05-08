@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cotizador</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+</head>
+<body onload="init()">
+<h1>Cotizador</h1>
+<div>
+    <form>
+        <label>
+            <select onclick="onSelect()" id="opciones" name="opciones">
+                <option value="peluqueria" label="Peluqueria"></option>
+                <option value="banio" label="Baño"></option>
+                <option value="limpiezaAcuario" label="Limpieza de acuario"></option>
+                <option value="consultaMedica" label="consultaMedica"></option>
+            </select>
+        </label>
+        <div id="opcionesPadre" >
+            <div id="opcionesContainer">
+            <p>Ancho Pecera: </p><span id="anchoPecera"></span>
+            <p>Alto Pecera: </p><span id="altoPecera"></span>
+            <p>Cantidad peces: </p><span id="cantidadPeces"></span>
+            </div>
+        </div>
+        <div id="labelsContainer">
+            <p>Cantidad: </p><span id="cantidad"></span>
+            <p>Raza: </p><span id="raza"></span>
+            <p>Peso:</p><span id="peso"></span>
+        </div>
+        <div>
+            <p>Consideraciones Especiales:</p>
+            <label>
+                <textarea id="consideraciones" placeholder="Coloque aca alguna consideracion a tener en cuenta">
+                </textarea>
+            </label>
+        </div>
+    </form >
+</div>
+</body>
+</html>
