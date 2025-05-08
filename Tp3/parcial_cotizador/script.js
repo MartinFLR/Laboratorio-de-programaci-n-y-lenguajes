@@ -1,67 +1,65 @@
+const precioPeluqueriaPorMascota25kg = 300;
+const precioPeluqueriaPorKgAdicional = 28;
 
-function init(){
-}
+const precioBanioPorMascota35kg = 250;
+const precioBanioPorKgAdicional = 15;
 
-function onSelect(){
-    let opcionElegida = document.getElementById("opciones").value
-    let alto = document.getElementById("inputAlto")
-    let ancho = document.getElementById("inputAncho")
-    let peces = document.getElementById("inputPeces")
-    let cantidad = document.getElementById("inputCantidad")
-    let raza = document.getElementById("inputRaza")
-    let peso = document.getElementById("inputPeso")
+const precioLimpliezaAcuarioPorMetroCuadrado = 125;
 
-    console.log(opcionElegida)
-    if (opcionElegida === "limpiezaAcuario"){
-        let opcionesContainer = document.getElementById("opcionesContainer")
-        let opcionesPadre = document.getElementById("opcionesPadre")
-        if(document.getElementById("opcionesContainer")){
-            limpiezaNodoPadre(document.getElementById("opcionesContainer"))
+const precioVacunacionPorMascota = 150;
+const precioVacunacionAdicionalVacuna = 55;
+
+const precioConsultaMedicaPorMascota = 180;
+
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("cotizadorForm");
+    const selectOpciones = document.getElementById("selectOpciones");
+    const datosAcuario = document.getElementById("opcionesAcuario");
+    const datosAnimal = document.getElementById("opcionesAnimal");
+    const resultadoContainer = document.getElementById("resultadoContainer");
+    const resultadoTexto = document.getElementById("resultadoTexto");
+
+
+    function actualizarVisibilidad() {
+        const opcionSeleccionada = selectOpciones.value;
+
+        if (opcionSeleccionada === "limpiezaAcuario") {
+            datosAcuario.style.display = "block";
+            datosAnimal.style.display = "none";
+        } else {
+            datosAcuario.style.display = "none";
+            datosAnimal.style.display = "block";
         }
-        opcionesContainer = document.createElement("div")
-        opcionesContainer.setAttribute("id", "opcionesContainer")
-
-        let anchoPeceraContainer = document.getElementById("anchoPecera")
-        let altoPeceraContainer = document.getElementById("altoPecera")
-        let cantidadPecesContainer = document.getElementById("cantidadPeces")
-        //limpiezaNodoPadre(opcionesContainer)
-        limpiezaNodoPadre(alto)
-            alto = document.createElement("input")
-            alto.setAttribute("id", "inputAlto")
-
-            limpiezaNodoPadre(ancho)
-            ancho = document.createElement("input")
-            ancho.setAttribute("id", "inputAncho")
-
-            limpiezaNodoPadre(peces)
-            peces = document.createElement("input")
-            peces.setAttribute("id", "inputPeces")
-
-
-        altoPeceraContainer.append(alto)
-        anchoPeceraContainer.append(ancho)
-        cantidadPecesContainer.append(peces)
-
-        opcionesContainer.append(altoPeceraContainer)
-        opcionesContainer.append(anchoPeceraContainer)
-        opcionesContainer.append(cantidadPecesContainer)
-
-        opcionesPadre.append(opcionesContainer);
-
-    }else if(document.getElementById("inputAlto")&& document.getElementById("inputAncho")){
-        limpiezaNodoPadre(alto)
-        limpiezaNodoPadre(ancho)
-        limpiezaNodoPadre(peces)
-    }else{
-        cantidad = document.createElement("input")
-        cantidad.setAttribute("id", "inputAlto")
 
     }
-}
+    // Llamar una vez al iniciar (por si hay un valor ya seleccionado)
+    actualizarVisibilidad();
 
-function limpiezaNodoPadre(old){
-    if(old){
-        let padre = old.parentNode
-        padre.removeChild(old)
-    }
-}
+    // Escucho los cambios en el select
+    selectOpciones.addEventListener("change", actualizarVisibilidad);
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const opcion = selectOpciones.value;
+        const consideraciones = document.getElementById("consideraciones").value;
+
+        const datos = {
+            servicio:opcion,
+            consideraciones: consideraciones,
+        };
+
+        if (opcion === "limpiezaAcuario") {
+            datos.anchoPecera = document.getElementById("anchoPecera").value;
+            datos.altoPecera = document.getElementById("altoPecera").value;
+            datos.cantidadPeces = document.getElementById("cantidadPeces").value;
+        } else {
+            datos.cantidad = document.getElementById("cantidad").value;
+            datos.raza = document.getElementById("raza").value;
+            datos.peso = document.getElementById("peso").value;
+        }
+
+        console.log("Datos a enviar:", datos);
+
+    });
+});

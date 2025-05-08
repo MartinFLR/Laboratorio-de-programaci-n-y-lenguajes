@@ -4,40 +4,79 @@
     <meta charset="UTF-8">
     <title>Cotizador</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js"></script>
 </head>
-<body onload="init()">
+<body>
 <h1>Cotizador</h1>
-<div>
-    <form>
-        <label>
-            <select onclick="onSelect()" id="opciones" name="opciones">
-                <option value="peluqueria" label="Peluqueria"></option>
-                <option value="banio" label="Baño"></option>
-                <option value="limpiezaAcuario" label="Limpieza de acuario"></option>
-                <option value="consultaMedica" label="consultaMedica"></option>
-            </select>
-        </label>
-        <div id="opcionesPadre" >
-            <div id="opcionesContainer">
-            <p>Ancho Pecera: </p><span id="anchoPecera"></span>
-            <p>Alto Pecera: </p><span id="altoPecera"></span>
-            <p>Cantidad peces: </p><span id="cantidadPeces"></span>
-            </div>
-        </div>
-        <div id="labelsContainer">
-            <p>Cantidad: </p><span id="cantidad"></span>
-            <p>Raza: </p><span id="raza"></span>
-            <p>Peso:</p><span id="peso"></span>
-        </div>
-        <div>
-            <p>Consideraciones Especiales:</p>
-            <label>
-                <textarea id="consideraciones" placeholder="Coloque aca alguna consideracion a tener en cuenta">
-                </textarea>
-            </label>
-        </div>
-    </form >
+<form id="cotizadorForm">
+    <fieldset>
+        <legend>Servicio</legend>
+        <label for="selectOpciones">Seleccione un servicio:</label>
+        <select id="selectOpciones" name="opciones">
+            <option value="peluqueria">Peluquería</option>
+            <option value="banio">Baño</option>
+            <option value="limpiezaAcuario">Limpieza de acuario</option>
+            <option value="consultaMedica">Consulta médica</option>
+        </select>
+    </fieldset>
+
+    <fieldset id="opcionesAcuario" style="display: none;">
+        <legend>Datos del Acuario</legend>
+        <label for="anchoPecera">Ancho Pecera:</label>
+        <input type="number" id="anchoPecera" name="anchoPecera">
+
+        <label for="altoPecera">Alto Pecera:</label>
+        <input type="number" id="altoPecera" name="altoPecera">
+
+        <label for="cantidadPeces">Cantidad de Peces:</label>
+        <input type="number" id="cantidadPeces" name="cantidadPeces">
+
+        <label for="domicilioPeces">Domicilio:</label>
+        <input type="number" id="domicilioPeces" name="cantidadPeces">
+    </fieldset>
+
+    <fieldset id="opcionesAnimal"  style="display: none;">
+        <legend>Datos del Animal</legend>
+        <label for="cantidad">Cantidad:</label>
+        <input type="number" id="cantidad" name="cantidad">
+
+        <label for="raza">Raza:</label>
+        <input type="text" id="raza" name="raza">
+
+        <label for="peso">Peso:</label>
+        <input type="number" id="peso" name="peso">
+
+        <legend>Entrega</legend>
+        <label for="selectEntrega">Seleccione una sucursal para entregarlo:</label>
+        <select id="selectEntrega" name="opcionesEntrega">
+            <option value="veterinariaCentral">Veterinaria Central</option>
+            <option value="sucursalKm8">Sucursal Km8</option>
+            <option value="sucursalCaletaCordoba">Sucursal Caleta Cordoba</option>
+            <option value="sucursalRadaTilly">Sucursal Rada Tilly</option>
+        </select>
+
+        <legend>Retiro</legend>
+        <label for="selectRetiro">Seleccione una sucursal para retiralo:</label>
+        <select id="selectRetiro" name="opcionesRetiro">
+            <option value="veterinariaCentral">Veterinaria Central</option>
+            <option value="sucursalKm8">Sucursal Km8</option>
+            <option value="sucursalCaletaCordoba">Sucursal Caleta Cordoba</option>
+            <option value="sucursalRadaTilly">Sucursal Rada Tilly</option>
+        </select>
+
+    </fieldset>
+
+    <fieldset>
+        <legend>Consideraciones Especiales</legend>
+        <label for="consideraciones">Observaciones:</label>
+        <textarea id="consideraciones" name="consideraciones" placeholder="Coloque aquí alguna consideración a tener en cuenta"></textarea>
+    </fieldset>
+    <button type="submit">Cotizar</button>
+</form>
+<div id="resultadoContainer" style="margin-top: 20px; display: none;">
+    <h3>Resultado de la Cotización</h3>
+    <p id="resultadoTexto"></p>
 </div>
+
+<script src="script.js"></script>
 </body>
 </html>
