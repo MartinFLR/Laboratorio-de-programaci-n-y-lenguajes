@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const datosAnimal = document.getElementById("opcionesAnimal");
     const resultadoContainer = document.getElementById("resultadoContainer");
     const resultadoTexto = document.getElementById("resultadoTexto");
-
+    let precioTotal = 0;
 
     function actualizarVisibilidad() {
         const opcionSeleccionada = selectOpciones.value;
@@ -50,16 +50,63 @@ document.addEventListener("DOMContentLoaded", function () {
         };
 
         if (opcion === "limpiezaAcuario") {
-            datos.anchoPecera = document.getElementById("anchoPecera").value;
-            datos.altoPecera = document.getElementById("altoPecera").value;
-            datos.cantidadPeces = document.getElementById("cantidadPeces").value;
-        } else {
-            datos.cantidad = document.getElementById("cantidad").value;
-            datos.raza = document.getElementById("raza").value;
-            datos.peso = document.getElementById("peso").value;
+            const ancho = parseFloat(document.getElementById("anchoPecera").value);
+            const alto = parseFloat(document.getElementById("altoPecera").value);
+            const cantidadPeces = parseInt(document.getElementById("cantidadPeces").value);
+            const domicilio = document.getElementById("domicilioPeces").value;
+
+            datos.anchoPecera = ancho;
+            datos.altoPecera = alto;
+            datos.cantidadPeces = cantidadPeces;
+            datos.domicilio = domicilio;
+
+            const area = ancho * alto;
+            precioTotal = area * precioLimpliezaAcuarioPorMetroCuadrado;
+
+
+        }  else {
+            const cantidad = parseInt(document.getElementById("cantidad").value);
+            const raza = document.getElementById("raza").value;
+            const peso = parseFloat(document.getElementById("peso").value);
+
+            datos.cantidad = cantidad;
+            datos.raza = raza;
+            datos.peso = peso;
+
+            if (opcion === "peluqueria") {
+                if (peso <= 25) {
+                    precioTotal = precioPeluqueriaPorMascota25kg;
+                } else {
+                    const extraKg = peso - 25;
+                    precioTotal = precioPeluqueriaPorMascota25kg + (extraKg * precioPeluqueriaPorKgAdicional);
+                }
+
+            } else if (opcion === "banio") {
+                if (peso <= 35) {
+                    precioTotal = precioBanioPorMascota35kg * cantidad;
+                } else {
+                    const extraKg = peso - 35;
+                    precioTotal = precioBanioPorMascota35kg + (extraKg * precioBanioPorKgAdicional);
+                }
+
+            } else if (opcion === "consultaMedica") {
+                console.log("entre consulta medica");
+                precioTotal = cantidad * precioConsultaMedicaPorMascota;
+
+            } else if (opcion === "vacunacion") {
+                console.log("entre consulta vacunacion");
+                    precioTotal = (precioVacunacionPorMascota + precioVacunacionAdicionalVacuna) * cantidad ;
+
+            }
         }
 
+        // Mostrar resultado
+        resultadoTexto.textContent = `El costo estimado del servicio es: $${precioTotal.toFixed(2)}`;
+        resultadoContainer.style.display = "block";
+
         console.log("Datos a enviar:", datos);
+
+
 
     });
 });
