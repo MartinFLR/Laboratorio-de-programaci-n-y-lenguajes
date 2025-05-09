@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
     }
-    // Llamar una vez al iniciar (por si hay un valor ya seleccionado)
+    // Llamo una vez al iniciar (por si hay un valor ya seleccionado)
     actualizarVisibilidad();
 
     // Escucho los cambios en el select
@@ -44,6 +44,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const opcion = selectOpciones.value;
         const consideraciones = document.getElementById("consideraciones").value;
 
+        //Acá por mas que no me lo marque el IDE
+        //al hacer por ejemplo datos.ancho, estoy accediendo a ese valor
         const datos = {
             servicio:opcion,
             consideraciones: consideraciones,
@@ -75,10 +77,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (opcion === "peluqueria") {
                 if (peso <= 25) {
-                    precioTotal = precioPeluqueriaPorMascota25kg;
+                    precioTotal = precioPeluqueriaPorMascota25kg * cantidad;
                 } else {
                     const extraKg = peso - 25;
-                    precioTotal = precioPeluqueriaPorMascota25kg + (extraKg * precioPeluqueriaPorKgAdicional);
+                    precioTotal = (precioPeluqueriaPorMascota25kg + (extraKg * precioPeluqueriaPorKgAdicional))*cantidad;
                 }
 
             } else if (opcion === "banio") {
@@ -86,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     precioTotal = precioBanioPorMascota35kg * cantidad;
                 } else {
                     const extraKg = peso - 35;
-                    precioTotal = precioBanioPorMascota35kg + (extraKg * precioBanioPorKgAdicional);
+                    precioTotal = (precioBanioPorMascota35kg + (extraKg * precioBanioPorKgAdicional))* cantidad;
                 }
 
             } else if (opcion === "consultaMedica") {
@@ -100,7 +102,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
 
-        // Mostrar resultado
         resultadoTexto.textContent = `El costo estimado del servicio es: $${precioTotal.toFixed(2)}`;
         resultadoContainer.style.display = "block";
 

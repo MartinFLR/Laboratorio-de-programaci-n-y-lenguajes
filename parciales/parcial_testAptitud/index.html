@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test de aptituda</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div>
+        <h1>Test de aptitud</h1>
+        <p> para laburar</p>
+
+        <form id="formDatosPersonales" style="display: block;">
+            <fieldset id="datosPersonales">
+                <legend>Datos personales</legend>
+
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre">
+
+                <label for="edad">Edad</label>
+                <input type="text" id="edad" name="edad">
+
+                <label for="domicilio">Domicilio</label>
+                <input type="text" id="domicilio" name="domicilio">
+
+                <button id="comenzarButton" type="submit">Comenzar Test</button>
+            </fieldset>
+        </form>
+
+        <form id="formPreguntas" style="display: none;" >
+            <fieldset>
+                <legend>Primera pregunta</legend>
+                <p>Seleccione una o varias opciones: </p>
+                <label for="1eraPregunta">¿Qué ingredientes lleva un desayuno simple?</label>
+                <div id="1eraPregunta">
+                    <label>
+                        Cafe o Té
+                        <input type="checkbox" value="3">
+                    </label>
+                    <label>
+                        Leche
+                        <input type="checkbox" value="2">
+                    </label>
+                    <label>
+                        Tostadas
+                        <input type="checkbox" value="2">
+                    </label>
+                    <label>
+                        Limón
+                        <input type="checkbox" value="0">
+                    </label>
+                    <label>
+                        Manteca
+                        <input type="checkbox" value="1">
+                    </label>
+                    <label>
+                        Medias Lunas
+                        <input type="checkbox" value="2">
+                    </label>
+                    <label>
+                        Ajo
+                        <input type="checkbox" value="-1">
+                    </label>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Segunda pregunta</legend>
+                <p>Seleccione una opción</p>
+                <label for="2daPregunta">¿Qué fruta seca sale de la uva?</label>
+                <div id="2daPregunta">
+                    <label>
+                        Anacardo
+                        <input multiple type="radio" name="2daPregunta" value="0">
+                    </label>
+                    <label>
+                        Pasas
+                        <input type="radio" name="2daPregunta" value="10">
+                    </label>
+                    <label>
+                        Ciruelas
+                        <input type="radio" name="2daPregunta" value="0">
+                    </label>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Tercera pregunta</legend>
+                <p>Seleccione una opción</p>
+                <label for="3eraPregunta">¿Para qué sirve el caldo corto?</label>
+                <div id="3eraPregunta">
+                    <label>
+                        Anacardo
+                        <input multiple type="radio" name="3eraPregunta" value="0">
+                    </label>
+                    <label>
+                        Pasas
+                        <input type="radio" name="3eraPregunta" value="10">
+                    </label>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Cuarta pregunta</legend>
+                <p>Seleccione una o varias opciones: </p>
+                <label for="4taPregunta">¿Qué ingredientes lleva un desayuno simple?</label>
+                <div id="4taPregunta">
+                    <label>
+                        180°C
+                        <input type="checkbox" value="8">
+                    </label>
+                    <label>
+                        200°C
+                        <input type="checkbox" value="0">
+                    </label>
+                    <label>
+                        170°C
+                        <input type="checkbox" value="2">
+                    </label>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Quinta pregunta</legend>
+                <p>Seleccione una o varias opciones: </p>
+                <label for="5taPregunta">¿Cómo se llama el pan sin levadura?</label>
+                <div id="5taPregunta">
+                    <label>
+                        Pan blanco
+                        <input type="checkbox" value="0">
+                    </label>
+                    <label>
+                        Pan germinado
+                        <input type="checkbox" value="0">
+                    </label>
+                    <label>
+                        Ácimo
+                        <input type="checkbox" value="8">
+                    </label>
+                </div>
+            </fieldset>
+            <button id="finalizarButton" type="submit">Comenzar Test</button>
+        </form>
+        <div style="display: none;">
+            <p>El resultado es: </p>
+            <p id="resultado"></p>
+        </div>
+    </div>
+
+
+<script src="script.js"></script>
+</body>
+</html>
