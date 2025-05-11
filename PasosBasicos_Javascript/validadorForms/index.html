@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario de Registro</title>
+  <style>
+    .error {
+      color: red;
+      font-size: 0.9em;
+    }
+    input:invalid, textarea:invalid {
+      border: 1px solid red;
+    }
+  </style>
+</head>
+<body>
+<h1>Formulario de Registro</h1>
+<form id="registroForm" novalidate>
+  <label>Email:</label><br />
+  <input type="email" name="email" required />
+  <div class="error" id="errorEmail"></div>
+  <br />
+
+  <label>Contraseña:</label><br />
+  <input type="password" name="clave" required />
+  <div class="error" id="errorClave"></div>
+  <br />
+
+  <label>Comentarios:</label><br />
+  <textarea name="comentarios" maxlength="100" required></textarea>
+  <div id="contadorComentarios">Quedan 100 caracteres</div>
+  <div class="error" id="errorComentarios"></div>
+  <br />
+
+  <label>Preferencias:</label><br />
+  <label><input type="checkbox" name="preferencias" value="informatica" /> Informática</label>
+  <label><input type="checkbox" name="preferencias" value="cocina" /> Cocina</label>
+  <label><input type="checkbox" name="preferencias" value="arquitectura" /> Arquitectura</label>
+  <div class="error" id="errorPreferencias"></div>
+  <br />
+
+  <button type="submit">Registrarse</button>
+</form>
+
+<script src="validador.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
