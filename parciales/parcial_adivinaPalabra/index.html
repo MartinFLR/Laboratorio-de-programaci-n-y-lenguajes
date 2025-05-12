@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Adivina palabra</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Adivina la palabra!</h1>
+    <form id="formOpciones" style="display: block;">
+        <fieldset>
+            <legend>Cantidad de palabras</legend>
+            <label for="selectOpciones">Seleccione una opcion:</label>
+            <select id="selectOpciones" name="opciones">
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="10">10</option>
+            </select>
+        </fieldset>
+    </form>
+
+    <label for="inputPalabra">
+        Adivine la palabra
+    </label>
+    <input type="text" id="inputPalabra" placeholder="Ingrese una letra o palabra">
+    <button id="botonAdivinar" type="submit">Adivinar</button>
+</body>
+<script src="script.js"></script>
+</html>
