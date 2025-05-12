@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Resumen de Expresiones Regulares</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<h1>Tabla de Expresiones Regulares (Regex)</h1>
+
+<table border="1" cellpadding="8" cellspacing="0">
+    <thead>
+    <tr style="background-color:#f2f2f2">
+        <th>Símbolo / Sintaxis</th>
+        <th>Significado</th>
+        <th>Ejemplo</th>
+        <th>Qué hace</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>.</code></td>
+        <td>Cualquier carácter excepto salto de línea</td>
+        <td><code>a.b</code></td>
+        <td>Coincide con "acb", "arb", etc.</td>
+    </tr>
+    <tr>
+        <td><code>*</code></td>
+        <td>0 o más repeticiones</td>
+        <td><code>lo*</code></td>
+        <td>"l", "lo", "loo", "looo"</td>
+    </tr>
+    <tr>
+        <td><code>+</code></td>
+        <td>1 o más repeticiones</td>
+        <td><code>lo+</code></td>
+        <td>"lo", "loo", "looo" (pero no solo "l")</td>
+    </tr>
+    <tr>
+        <td><code>?</code></td>
+        <td>0 o 1 vez</td>
+        <td><code>colou?r</code></td>
+        <td>Coincide con "color" o "colour"</td>
+    </tr>
+    <tr>
+        <td><code>[]</code></td>
+        <td>Cualquier carácter dentro del conjunto</td>
+        <td><code>[aeiou]</code></td>
+        <td>Coincide con cualquier vocal</td>
+    </tr>
+    <tr>
+        <td><code>[^]</code></td>
+        <td>Negación: cualquier carácter que no esté dentro</td>
+        <td><code>[^aeiou]</code></td>
+        <td>Coincide con consonantes</td>
+    </tr>
+    <tr>
+        <td><code>^</code></td>
+        <td>Inicio de línea</td>
+        <td><code>^Hola</code></td>
+        <td>Coincide con frases que empiezan con "Hola"</td>
+    </tr>
+    <tr>
+        <td><code>$</code></td>
+        <td>Fin de línea</td>
+        <td><code>mundo$</code></td>
+        <td>Coincide con frases que terminan en "mundo"</td>
+    </tr>
+    <tr>
+        <td><code>{n}</code></td>
+        <td>Exactamente n repeticiones</td>
+        <td><code>a{3}</code></td>
+        <td>Coincide con "aaa"</td>
+    </tr>
+    <tr>
+        <td><code>{n,m}</code></td>
+        <td>Entre n y m repeticiones</td>
+        <td><code>a{2,4}</code></td>
+        <td>"aa", "aaa", o "aaaa"</td>
+    </tr>
+    <tr>
+        <td><code>\w</code></td>
+        <td>Letra, número o guión bajo (equivale a [A-Za-z0-9_])</td>
+        <td><code>\w+</code></td>
+        <td>Coincide con una o más letras o números</td>
+    </tr>
+    <tr>
+        <td><code>\d</code></td>
+        <td>Cualquier dígito (0-9)</td>
+        <td><code>\d{2}</code></td>
+        <td>Coincide con dos números seguidos</td>
+    </tr>
+    <tr>
+        <td><code>\s</code></td>
+        <td>Espacio en blanco</td>
+        <td><code>hola\s+mundo</code></td>
+        <td>Coincide con "hola mundo" (uno o más espacios entre)</td>
+    </tr>
+    <tr>
+        <td><code>\b</code></td>
+        <td>Borde de palabra</td>
+        <td><code>\bsol\b</code></td>
+        <td>Coincide solo con "sol", no con "solución"</td>
+    </tr>
+    <tr>
+        <td><code>\</code></td>
+        <td>Escape de caracteres especiales</td>
+        <td><code>\.</code></td>
+        <td>Coincide con el punto "." literal</td>
+    </tr>
+    <tr>
+        <td><code>|</code></td>
+        <td>Alternativa (o)</td>
+        <td><code>gato|perro</code></td>
+        <td>Coincide con "gato" o "perro"</td>
+    </tr>
+    <tr>
+        <td><code>( )</code></td>
+        <td>Agrupación</td>
+        <td><code>(abc)+</code></td>
+        <td>Coincide con "abc", "abcabc", etc.</td>
+    </tr>
+    <tr>
+        <td><code>/.../g</code></td>
+        <td>Bandera global</td>
+        <td><code>"ana".match(/a/g)</code></td>
+        <td>Busca **todas** las ocurrencias, devuelve <code>["a", "a"]</code></td>
+    </tr>
+    <tr>
+        <td><code>/.../i</code></td>
+        <td>Bandera insensitive (sin distinguir mayúsculas/minúsculas)</td>
+        <td><code>"Ana".match(/a/i)</code></td>
+        <td>Coincide con "A" o "a"</td>
+    </tr>
+    <tr>
+        <td><code>/.../gi</code></td>
+        <td>Global + insensitive</td>
+        <td><code>"Ana ama a Ada".match(/a/gi)</code></td>
+        <td>Devuelve todas las "a" o "A" encontradas: <code>["A", "a", "a", "A", "a"]</code></td>
+    </tr>
+    <tr>
+        <td><code>match()</code></td>
+        <td>Método de cadena para buscar con regex</td>
+        <td><code>frase.match(/a/gi)</code></td>
+        <td>Devuelve un array con todas las coincidencias</td>
+    </tr>
+    <tr>
+        <td><code>(... || [])</code></td>
+        <td>Operador OR: evita errores si <code>match</code> da <code>null</code></td>
+        <td><code>(frase.match(/a/gi) || []).length</code></td>
+        <td>Cuenta cuántas veces aparece "a", aún si no hay ninguna</td>
+    </tr>
+    <tr>
+        <td><code>/.../g</code></td>
+        <td>Bandera global</td>
+        <td><code>"ana".match(/a/g)</code></td>
+        <td>Devuelve todas las coincidencias: <code>["a", "a"]</code></td>
+    </tr>
+    <tr>
+        <td><code>/.../i</code></td>
+        <td>Ignorar mayúsculas/minúsculas</td>
+        <td><code>"Ana".match(/a/i)</code></td>
+        <td>Coincide con "A" o "a"</td>
+    </tr>
+    <tr>
+        <td><code>/.../gi</code></td>
+        <td>Global + case-insensitive</td>
+        <td><code>"Ana ama a Ada".match(/a/gi)</code></td>
+        <td>Devuelve todas las "a" o "A": <code>["A", "a", "a", "A", "a"]</code></td>
+    </tr>
+    <tr>
+        <td><code>match()</code></td>
+        <td>Método que busca coincidencias</td>
+        <td><code>frase.match(/a/gi)</code></td>
+        <td>Devuelve un array de coincidencias o <code>null</code></td>
+    </tr>
+    <tr>
+        <td><code>test()</code></td>
+        <td>Prueba si hay coincidencias</td>
+        <td><code>/hola/.test("hola mundo")</code></td>
+        <td>Devuelve <code>true</code> o <code>false</code></td>
+    </tr>
+    <tr>
+        <td><code>replace()</code></td>
+        <td>Reemplaza texto</td>
+        <td><code>"hola".replace(/o/, "a")</code></td>
+        <td>Devuelve <code>"hala"</code></td>
+    </tr>
+    <tr>
+        <td><code>search()</code></td>
+        <td>Devuelve la posición de la primera coincidencia</td>
+        <td><code>"hola mundo".search(/m/)</code></td>
+        <td>Devuelve <code>5</code></td>
+    </tr>
+    <tr>
+        <td><code>\W</code></td>
+        <td>No alfanumérico</td>
+        <td><code>\W+</code></td>
+        <td>Coincide con signos y espacios</td>
+    </tr>
+    <tr>
+        <td><code>\D</code></td>
+        <td>No dígito</td>
+        <td><code>\D+</code></td>
+        <td>Coincide con letras, símbolos, etc.</td>
+    </tr>
+    <tr>
+        <td><code>\S</code></td>
+        <td>No espacio</td>
+        <td><code>\S+</code></td>
+        <td>Coincide con secuencias sin espacios</td>
+    </tr>
+    <tr>
+        <td><code>(?=...)</code></td>
+        <td>Lookahead positivo</td>
+        <td><code>\d(?=px)</code></td>
+        <td>Coincide con un dígito seguido de "px", sin incluir "px"</td>
+    </tr>
+    <tr>
+        <td><code>(?!...)</code></td>
+        <td>Lookahead negativo</td>
+        <td><code>\d(?!px)</code></td>
+        <td>Coincide con un dígito que **no** va seguido de "px"</td>
+    </tr>
+    <tr>
+        <td><code>(?&lt;=...)</code></td>
+        <td>Lookbehind positivo</td>
+        <td><code>(?&lt;=\$)\d+</code></td>
+        <td>Coincide con un número que viene después de "$"</td>
+    </tr>
+    <tr>
+        <td><code>(?&lt;!...)</code></td>
+        <td>Lookbehind negativo</td>
+        <td><code>(?&lt;!\$)\d+</code></td>
+        <td>Coincide con número **no** precedido por "$"</td>
+    </tr>
+    <tr>
+        <td><code>(?:...)</code></td>
+        <td>Agrupación sin captura</td>
+        <td><code>(?:abc)+</code></td>
+        <td>Repite "abc" pero no captura para backreferences</td>
+    </tr>
+    <tr>
+        <td><code>\n</code>, <code>\r</code>, <code>\t</code></td>
+        <td>Saltos de línea, retorno de carro, tabulación</td>
+        <td><code>"linea1\nlinea2"</code></td>
+        <td>Coinciden con saltos reales en el texto</td>
+    </tr>
+
+    </tbody>
+</table>
+
+</body>
+</html>

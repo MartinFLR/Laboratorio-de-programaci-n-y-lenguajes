@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Frase Dinámica</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 2em; max-width: 600px; margin: auto; }
+    h2, h3 { color: #007BFF; }
+    label { display: block; margin-top: 1em; }
+    button { margin-top: 1em; padding: 0.5em 1em; background-color: #007BFF; color: white; border: none; cursor: pointer; }
+    button:hover { background-color: #0056b3; }
+  </style>
+</head>
+<body>
+<h2>Ingresa una frase</h2>
+<form id="formulario">
+  <label for="frase">Frase (al menos 3 palabras):</label>
+  <input type="text" id="frase" required>
+  <button type="submit">Procesar Frase</button>
+</form>
+
+<div id="resultado"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
