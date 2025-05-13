@@ -1,0 +1,46 @@
+<!--
+Juego de memoria
+
+intentos
+aciertos
+num partidas (aca usa cookies)(checkear si ya hay una de antes)
+
+20 intentos termina
+
+seleccion tipo de carta(numeros o letras)
+matriz de numeros
+
+seleccion de cuadros, quedan marcados y cambian de numero
+-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Juego de memoria</title>
+</head>
+<body>
+<div>
+  <h1>Juego de memoria</h1>
+  <div id="contenedorTablero"></div>
+
+  <div id="contenedorSeccionDatos">
+    <p>Intentos: </p><span id="intentos"></span>
+    <p>Aciertos: </p><span id="aciertos"></span>
+    <p>Partida numero: </p><span id="cantPartidas"></span>
+
+      <label for="selectTipoCarta">
+        <select id="selectTipoCarta" name="tipoCarta">
+          <option value="numero">Numero</option>
+          <option value="letra">Letra</option>
+        </select>
+      </label>
+    <div id="contenedorBotones">
+      <button id="botonIniciar">Iniciar</button>
+      <button id="botonRendirse">Rendirse</button>
+    </div>
+  </div>
+
+</div>
+</body>
+<script src="script.js"></script>
+</html>
