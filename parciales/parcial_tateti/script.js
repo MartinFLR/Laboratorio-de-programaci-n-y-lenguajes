@@ -1,16 +1,6 @@
-
 let turnoHumano = "x";
 let turnoMaquina = "o";
 let turnoActual = turnoHumano;
-let contadorPartidas;
-let contadorVictorias;
-let contadorDerrotas;
-
-let contadorPartidas = parseInt(getCookie("contadorPartidas"));
-let contadorVictorias = parseInt(getCookie("contadorVictorias"));
-let contadorDerrotas = parseInt(getCookie("contadorDerrotas"));
-
-
 let contadorPartidas = parseInt(getCookie("contadorPartidas"));
 let contadorVictorias = parseInt(getCookie("contadorVictorias"));
 let contadorDerrotas = parseInt(getCookie("contadorDerrotas"));
@@ -19,40 +9,16 @@ let contadorDerrotas = parseInt(getCookie("contadorDerrotas"));
 document.addEventListener("DOMContentLoaded", function() {
     let botonRendirse = document.getElementById("botonRendirse")
     let botonIniciarJuego = document.getElementById("botonIniciarJuego");
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    let spanContadorPartidas = document.getElementById("contadorPartidas")
-    let spanContadorDerrotas = document.getElementById("contadorDerrotas");
-    let spanContadorVictorias = document.getElementById("contadorVictorias");
-
 
     contadorPartidas = parseInt(getCookie("contadorPartidas"));
     contadorVictorias = parseInt(getCookie("contadorVictorias"));
     contadorDerrotas = parseInt(getCookie("contadorDerrotas"));
 
-    if(contadorPartidas === ""){
-=======
-
-    if(!contadorPartidas){
->>>>>>> Stashed changes
-=======
-
-    if(!contadorPartidas){
->>>>>>> Stashed changes
+    if(!contadorPartidas && !contadorVictorias && !contadorDerrotas){
         setCookie("contadorPartidas",0,10)
         setCookie("contadorDerrotas",0,10);
         setCookie("contadorVictorias",0,10);
     }
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-
-    spanContadorPartidas.textContent = contadorPartidas;
-    spanContadorDerrotas.textContent = contadorDerrotas;
-    spanContadorVictorias.textContent = contadorVictorias
-
-    botonIniciarJuego.addEventListener("click", iniciarJuego);
-    botonRendirse.addEventListener("click",)
-=======
     contadorPartidas = parseInt(getCookie("contadorPartidas"));
     contadorVictorias = parseInt(getCookie("contadorVictorias"));
     contadorDerrotas = parseInt(getCookie("contadorDerrotas"));
@@ -61,17 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     botonIniciarJuego.addEventListener("click", iniciarJuego);
     botonRendirse.addEventListener("click",rendirse)
->>>>>>> Stashed changes
-=======
-    contadorPartidas = parseInt(getCookie("contadorPartidas"));
-    contadorVictorias = parseInt(getCookie("contadorVictorias"));
-    contadorDerrotas = parseInt(getCookie("contadorDerrotas"));
 
-    actualizarPantalla()
-
-    botonIniciarJuego.addEventListener("click", iniciarJuego);
-    botonRendirse.addEventListener("click",rendirse)
->>>>>>> Stashed changes
 });
 
 function iniciarJuego() {
@@ -177,13 +133,6 @@ function verificarFinalPartida() {
 function mostrarGanador(ganador) {
     let mensaje = ganador === "Empate" ? "El juego ha terminado en empate." : `${ganador} ha ganado!`;
     if(ganador === turnoHumano){
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-        
-    }
-=======
-=======
->>>>>>> Stashed changes
         contadorVictorias++
         setCookie("contadorVictorias",contadorVictorias,10)
         actualizarPantalla()
@@ -199,25 +148,10 @@ function mostrarGanador(ganador) {
 
     let botonIniciarJuego = document.getElementById("botonIniciarJuego")
     botonIniciarJuego.style.display = "block";
-
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     alert(mensaje);
     
 }
 function rendirse(){
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-
-}
-
-
-
-=======
-=======
->>>>>>> Stashed changes
         let botonRendirse = document.getElementById("botonRendirse")
     botonRendirse.style.display = "none";
 
@@ -252,10 +186,7 @@ function eliminarTablero(){
 
 
 //Cookies
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
 function setCookie(nombre, valor, dias) {
     const fecha = new Date();
     fecha.setTime(fecha.getTime() + (dias * 24 * 60 * 60 * 1000));
