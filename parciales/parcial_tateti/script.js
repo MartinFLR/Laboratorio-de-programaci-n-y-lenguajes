@@ -1,10 +1,34 @@
 let turnoHumano = "x";
 let turnoMaquina = "o";
 let turnoActual = turnoHumano;
+let contadorPartidas;
+let contadorVictorias;
+let contadorDerrotas;
 
 document.addEventListener("DOMContentLoaded", function() {
+    let botonRendirse = document.getElementById("botonRendirse")
     let botonIniciarJuego = document.getElementById("botonIniciarJuego");
+    let spanContadorPartidas = document.getElementById("contadorPartidas")
+    let spanContadorDerrotas = document.getElementById("contadorDerrotas");
+    let spanContadorVictorias = document.getElementById("contadorVictorias");
+
+
+    contadorPartidas = parseInt(getCookie("contadorPartidas"));
+    contadorVictorias = parseInt(getCookie("contadorVictorias"));
+    contadorDerrotas = parseInt(getCookie("contadorDerrotas"));
+
+    if(contadorPartidas === ""){
+        setCookie("contadorPartidas",0,10)
+        setCookie("contadorDerrotas",0,10);
+        setCookie("contadorVictorias",0,10);
+    }
+
+    spanContadorPartidas.textContent = contadorPartidas;
+    spanContadorDerrotas.textContent = contadorDerrotas;
+    spanContadorVictorias.textContent = contadorVictorias
+
     botonIniciarJuego.addEventListener("click", iniciarJuego);
+    botonRendirse.addEventListener("click",)
 });
 
 function iniciarJuego() {
@@ -99,6 +123,35 @@ function verificarFinalPartida() {
 
 function mostrarGanador(ganador) {
     let mensaje = ganador === "Empate" ? "El juego ha terminado en empate." : `${ganador} ha ganado!`;
+    if(ganador === turnoHumano){
+        
+    }
     alert(mensaje);
     
+}
+function rendirse(){
+
+}
+
+
+
+function setCookie(nombre, valor, dias) {
+    const fecha = new Date();
+    fecha.setTime(fecha.getTime() + (dias * 24 * 60 * 60 * 1000));
+    const cookieStr = `${nombre}=${encodeURIComponent(valor)};expires=${fecha.toUTCString()};path=/`;
+    console.log("Set cookie:", cookieStr);
+    document.cookie = cookieStr;
+}
+
+
+function getCookie(nombre) {
+    const cookies = document.cookie.split("; ");
+    for (let cookie of cookies) {
+        const [key, value] = cookie.split("=");
+        if (key === nombre) {
+            console.log(value)
+            return decodeURIComponent(value);
+        }
+    }
+    return null;
 }

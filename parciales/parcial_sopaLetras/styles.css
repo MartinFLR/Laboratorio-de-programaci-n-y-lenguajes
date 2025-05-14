@@ -3,9 +3,10 @@ body{
 }
 #contenedorJuego{
     display: grid;
-    grid-template-columns: repeat(3,100px);
+    grid-template-columns: repeat(4,100px);
     gap: 5px;
 }
+
 .celda{
     width: 100px;
     height: 100px;
@@ -15,7 +16,4 @@ body{
     line-height: 100px;
     background-color: #eee;
     cursor: pointer;
-}
-.puntuacion{
-    color: white;
 }
