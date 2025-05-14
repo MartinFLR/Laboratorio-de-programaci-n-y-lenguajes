@@ -1,3 +1,4 @@
+
 let turnoHumano = "x";
 let turnoMaquina = "o";
 let turnoActual = turnoHumano;
@@ -5,9 +6,15 @@ let contadorPartidas;
 let contadorVictorias;
 let contadorDerrotas;
 
+let contadorPartidas = parseInt(getCookie("contadorPartidas"));
+let contadorVictorias = parseInt(getCookie("contadorVictorias"));
+let contadorDerrotas = parseInt(getCookie("contadorDerrotas"));
+
+
 document.addEventListener("DOMContentLoaded", function() {
     let botonRendirse = document.getElementById("botonRendirse")
     let botonIniciarJuego = document.getElementById("botonIniciarJuego");
+<<<<<<< Updated upstream
     let spanContadorPartidas = document.getElementById("contadorPartidas")
     let spanContadorDerrotas = document.getElementById("contadorDerrotas");
     let spanContadorVictorias = document.getElementById("contadorVictorias");
@@ -18,10 +25,15 @@ document.addEventListener("DOMContentLoaded", function() {
     contadorDerrotas = parseInt(getCookie("contadorDerrotas"));
 
     if(contadorPartidas === ""){
+=======
+
+    if(!contadorPartidas){
+>>>>>>> Stashed changes
         setCookie("contadorPartidas",0,10)
         setCookie("contadorDerrotas",0,10);
         setCookie("contadorVictorias",0,10);
     }
+<<<<<<< Updated upstream
 
     spanContadorPartidas.textContent = contadorPartidas;
     spanContadorDerrotas.textContent = contadorDerrotas;
@@ -29,9 +41,28 @@ document.addEventListener("DOMContentLoaded", function() {
 
     botonIniciarJuego.addEventListener("click", iniciarJuego);
     botonRendirse.addEventListener("click",)
+=======
+    contadorPartidas = parseInt(getCookie("contadorPartidas"));
+    contadorVictorias = parseInt(getCookie("contadorVictorias"));
+    contadorDerrotas = parseInt(getCookie("contadorDerrotas"));
+
+    actualizarPantalla()
+
+    botonIniciarJuego.addEventListener("click", iniciarJuego);
+    botonRendirse.addEventListener("click",rendirse)
+>>>>>>> Stashed changes
 });
 
 function iniciarJuego() {
+    contadorPartidas++;
+    setCookie("contadorPartidas",contadorPartidas,10)
+    
+    let botonRendirse = document.getElementById("botonRendirse")
+    botonRendirse.style.display = "block";
+
+    let botonIniciarJuego = document.getElementById("botonIniciarJuego")
+    botonIniciarJuego.style.display = "none";
+
     let contenedorJuego = document.getElementById("contenedorJuego");
     for (let fila = 0; fila < 3; fila++) {
         for (let col = 0; col < 3; col++) {
@@ -43,6 +74,7 @@ function iniciarJuego() {
             contenedorJuego.appendChild(celda);
         }
     }
+    actualizarPantalla()
 }
 
 function manejarClickCelda(e) {
@@ -124,17 +156,73 @@ function verificarFinalPartida() {
 function mostrarGanador(ganador) {
     let mensaje = ganador === "Empate" ? "El juego ha terminado en empate." : `${ganador} ha ganado!`;
     if(ganador === turnoHumano){
+<<<<<<< Updated upstream
         
     }
+=======
+        contadorVictorias++
+        setCookie("contadorVictorias",contadorVictorias,10)
+        actualizarPantalla()
+        eliminarTablero()
+    }else{
+        contadorDerrotas++
+        setCookie("contadorDerrotas",contadorDerrotas,10)
+        actualizarPantalla()
+        eliminarTablero()
+    }
+    let botonRendirse = document.getElementById("botonRendirse")
+    botonRendirse.style.display = "none";
+
+    let botonIniciarJuego = document.getElementById("botonIniciarJuego")
+    botonIniciarJuego.style.display = "block";
+
+>>>>>>> Stashed changes
     alert(mensaje);
     
 }
 function rendirse(){
+<<<<<<< Updated upstream
 
 }
 
 
 
+=======
+        let botonRendirse = document.getElementById("botonRendirse")
+    botonRendirse.style.display = "none";
+
+    let botonIniciarJuego = document.getElementById("botonIniciarJuego")
+    botonIniciarJuego.style.display = "block";
+
+        eliminarTablero()
+        contadorDerrotas++
+        setCookie("contadorDerrotas",contadorDerrotas,10)
+        actualizarPantalla()
+}
+
+
+function actualizarPantalla(){
+    let spanContadorPartidas = document.getElementById("contadorPartidas")
+    let spanContadorDerrotas = document.getElementById("contadorDerrotas");
+    let spanContadorVictorias = document.getElementById("contadorVictorias");
+
+    
+    spanContadorPartidas.textContent = contadorPartidas;
+    spanContadorDerrotas.textContent = contadorDerrotas;
+    spanContadorVictorias.textContent = contadorVictorias
+
+}
+
+function eliminarTablero(){
+    let todasLasCeldas = document.querySelectorAll(".celda");
+    todasLasCeldas.forEach(celda =>{
+        celda.remove()
+    })
+}
+
+
+//Cookies
+>>>>>>> Stashed changes
 function setCookie(nombre, valor, dias) {
     const fecha = new Date();
     fecha.setTime(fecha.getTime() + (dias * 24 * 60 * 60 * 1000));
