@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function (){
 
 
     botonComenzarTest.addEventListener("click",function(e){
-       comenzarTest(e)
+        comenzarTest(e)
         let nombre = document.getElementById("nombre")
         let edad = document.getElementById("edad")
         let domicilio = document.getElementById("domicilio")
