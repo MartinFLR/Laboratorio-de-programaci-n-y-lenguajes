@@ -76,14 +76,10 @@ function verificarVictoria() {
 }
 
 function crearResultados(){
-    let resultados = document.getElementById("resultados");
-    let resultadosReales = document.createElement("div");
-    let parrafoVictorias = document.createElement("p");
-    let parrafoDerrotas = document.createElement("p");
-
-    parrafoDerrotas.setAttribute("id","parrafoDerrotas");
-    parrafoVictorias.setAttribute("id","parrafoVictorias");
-    resultadosReales.setAttribute("id","resultadosReales");
+    let resultados = $id("resultados");
+    let resultadosReales = crearElemento("div","resultadosReales");
+    let parrafoVictorias = crearElemento("p","parrafoVictorias");
+    let parrafoDerrotas = crearElemento("p","parrafoDerrotas");
 
     resultadosReales.appendChild(parrafoVictorias);
     resultadosReales.appendChild(parrafoDerrotas);
@@ -120,12 +116,12 @@ function empate(){
 }
 
 function actualizarPantalla(){
-    let parrafoVictorias = document.getElementById("parrafoVictorias");
-    let parrafoDerrotas = document.getElementById("parrafoDerrotas");
-    let spanRonda = document.getElementById("spanRonda")
-    let spanBatallas = document.getElementById("spanBatallas")
-    let spanArmaComputadora = document.getElementById("spanArmaComputadora");
-    let spanGanador = document.getElementById("spanGanador");
+    let parrafoVictorias = $id("parrafoVictorias");
+    let parrafoDerrotas = $id("parrafoDerrotas");
+    let spanRonda = $id("spanRonda")
+    let spanBatallas = $id("spanBatallas")
+    let spanArmaComputadora = $id("spanArmaComputadora");
+    let spanGanador = $id("spanGanador");
 
     spanGanador.textContent = ganador;
     spanArmaComputadora.textContent = armaActualComputadora;
@@ -157,4 +153,27 @@ function setDato(nombre, valor) {
 function getDato(nombre) {
     const item = localStorage.getItem(nombre);
     return item ? JSON.parse(item) : null;
+}
+
+function $id(id) {
+    return document.getElementById(id);
+}
+
+function $all(selector) {
+    return document.querySelectorAll(selector);
+}
+
+function crearElemento(tag, id = null, clases = null) {
+    const el = document.createElement(tag);
+    if (id) {
+        el.id = id;
+    }
+    if (clases) {
+        if (Array.isArray(clases)) {
+            el.classList.add(...clases);
+        } else {
+        el.classList.add(clases);
+        }
+    }
+    return el;
 }

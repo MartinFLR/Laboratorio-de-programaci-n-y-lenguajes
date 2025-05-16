@@ -43,3 +43,27 @@ function getCookie(nombre) {
 }
 
 `${i}- 🗓️ ${partida.fecha} — 🏆 ${partida.ganador}\n`
+
+
+function $id(id) {
+    return document.getElementById(id);
+}
+
+function $all(selector) {
+    return document.querySelectorAll(selector);
+}
+
+function crearElemento(tag, id = null, clases = null) {
+    const el = document.createElement(tag);
+    if (id) {
+        el.id = id;
+    }
+    if (clases) {
+        if (Array.isArray(clases)) {
+            el.classList.add(...clases);
+        } else {
+        el.classList.add(clases);
+        }
+    }
+    return el;
+}
