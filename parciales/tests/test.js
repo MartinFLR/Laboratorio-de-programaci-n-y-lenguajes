@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded",function(){
 })
 
 function matchAll(texto){
-    
     console.log("MATCH ALL");
 
     //Ejemplo de uso de matchAll con forOf
@@ -35,7 +34,6 @@ function match(texto){
 
     //Ejemplo de uso de match
     //devuelve un array
-
     let array = texto.match(/r/g);
 
     if(!array){

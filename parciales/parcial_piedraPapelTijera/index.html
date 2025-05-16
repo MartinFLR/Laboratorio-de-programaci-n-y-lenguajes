@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Mi Sitio Web</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+    <main class="contenedorPrincipal">
+        <section>
+            <article>
+                <div class="contenedorJugador">
+                    <h2>Jugador</h2>
+                    <div class="armasJugador">
+                        <button id="armaJugadorPiedra">Piedra</button>
+                        <button id="armaJugadorPapel">Papel</button>
+                        <button id="armaJugadorTijeras">Tijeras</button>
+                    </div>
+                </div>
+            </article>  
+        </section>
+    
+        <aside>
+            <article>
+                <div class="contenedorAside">
+                    <div class="contenedorComputadora">
+                        <h2>Computadora</h2>
+                        <p>La arma elegida por maquina fue: </p><span id="spanArmaComputadora"></span>
+                    </div>
+    
+                    <div class="contenedorResultados">
+                        <h3>Resultados</h3>
+                        <p>El ganador fue: </p><span id="spanGanador"></span>
+
+                        <p>Ronda: </p><span id="spanRonda"></span>
+                        <p>Batallas Realizadas: </p><span id="spanBatallas"></span>
+                        <div id="resultados"></div>
+                    </div>
+                </div>
+            </article>
+        </aside>
+    </main>
+    
+        <footer>
+            <p></p>
+            <!--
+            <p><a href="/politica-privacidad.html"></a></p>
+            -->
+        </footer>
+
+    <script src="script.js" ></script>
+</body>
+</html>

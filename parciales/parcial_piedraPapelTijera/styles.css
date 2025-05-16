@@ -1,0 +1,38 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    font-family: sans-serif;
+}
+
+.contenedorPrincipal {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+.contenedorJugador,
+.contenedorAside {
+    width: 50vw;
+    height: 100vh;
+    justify-items: center;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    overflow: auto; 
+}
+
+.contenedorComputadora,
+.contenedorResultados{
+    border: 1px solid #ccc;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+}
