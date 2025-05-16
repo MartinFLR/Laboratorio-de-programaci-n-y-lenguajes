@@ -11,11 +11,12 @@ document.addEventListener("DOMContentLoaded",function(){
     let botonIniciarJuego = document.getElementById("iniciarJuego");
     let botonNuevaTirada = document.getElementById("nuevaTirada");
     let selectOpciones = document.getElementById("selectOpciones");
-
+    let botonRendirse = document.getElementById("rendirse")
 
     valueOpciones = document.getElementById("selectOpciones").value;
 
     ocultarElemento(botonNuevaTirada)
+    ocultarElemento(botonRendirse)
 
     if(!victorias && !derrotas && !ultimas5Partidas){
         setDato("victorias",0);
@@ -31,22 +32,30 @@ document.addEventListener("DOMContentLoaded",function(){
     selectOpciones.addEventListener("change",onChangeSelect)
     botonIniciarJuego.addEventListener("click",iniciarJuego);
     botonNuevaTirada.addEventListener("click",nuevaTirada);
+    botonRendirse.addEventListener("click",rendirse)
 
     actualizarPantalla()
-
 })
+
+
+
+
+
 
 function iniciarJuego(){
     let botonNuevaTirada = document.getElementById("nuevaTirada");
     let botonIniciarJuego = document.getElementById("iniciarJuego");
+    let botonRendirse = document.getElementById("rendirse");
     let contenedorJuego = document.getElementById("contenedorJuego");
+    let contenedorSelectOpciones = document.getElementById("contenedorSelectOpciones")
     let contenedorReal = document.createElement("div");
     contenedorReal.setAttribute("id","contenedorReal");
 
     mostrarElemento(botonNuevaTirada)
+    mostrarElemento(botonRendirse)
+
+    ocultarElemento(contenedorSelectOpciones)
     ocultarElemento(botonIniciarJuego)
-
-
 
     inicializarNumeros()
     ronda++
@@ -58,8 +67,6 @@ function iniciarJuego(){
     let contenedorMaquina = document.createElement("p");
     contenedorMaquina.setAttribute("id","contenedorMaquina");
     contenedorMaquina.classList.add("maquina")
-
-    
 
     contenedorReal.appendChild(contenedorJugador);
     contenedorReal.appendChild(contenedorMaquina);
@@ -90,7 +97,6 @@ function restaArray(array) {
         }
     }
 }
-
 
 function verificarFinal() {
     let contadorJugador = 0;
@@ -139,7 +145,6 @@ function verificarFinal() {
     }
 }
 
-
 function agregoAUltimasPartidas(ganador) {
     const fechaMomento = new Date().toLocaleString();
     ultimas5Partidas = getDato("ultimasPartidas") || [];
@@ -157,7 +162,6 @@ function agregoAUltimasPartidas(ganador) {
 
     setDato("ultimasPartidas", ultimas5Partidas);
 }
-
 
 function actualizarPantalla(){
     
@@ -207,7 +211,6 @@ function actualizarPantalla(){
     console.log(primeraVez)
 }
 
-
 function inicializarNumeros(){
     jugador = []
     maquina = []
@@ -219,19 +222,33 @@ function inicializarNumeros(){
     }
 }
 
+function rendirse(){
+    alert("Te rendiste!, la victoria es de la maquina")
+    derrotas++;
+    ronda = 0;
+    agregoAUltimasPartidas("maquina")
+    actualizarPantalla();
+    reiniciarTablero();
+}
 
 function reiniciarTablero(){
     let contenedorReal = document.getElementById("contenedorReal");
     let botonIniciarJuego = document.getElementById("iniciarJuego");
     let botonNuevaTirada = document.getElementById("nuevaTirada");
+    let botonRendirse = document.getElementById("rendirse")
 
     ocultarElemento(botonNuevaTirada)
+    ocultarElemento(botonRendirse)
+
     mostrarElemento(botonIniciarJuego)
+    mostrarElemento(contenedorSelectOpciones)
 
     contenedorReal.remove();
 
 
 }
+
+
 
 //utils 
 function ocultarElemento(elem) {
