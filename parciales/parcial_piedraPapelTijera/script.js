@@ -9,9 +9,9 @@ let rondas = 0;
 let ganador = "";
 
 document.addEventListener("DOMContentLoaded",function(){
-    let armaJugadorPiedra = document.getElementById("armaJugadorPiedra");
-    let armaJugadorPapel = document.getElementById("armaJugadorPapel");
-    let armaJugadorTijeras = document.getElementById("armaJugadorTijeras");
+    let armaJugadorPiedra = $id("armaJugadorPiedra");
+    let armaJugadorPapel = $id("armaJugadorPapel");
+    let armaJugadorTijeras = $id("armaJugadorTijeras");
 
     if(!batallasRealizadas && !victorias && !derrotas){
         setDato("batallasRealizadas",0)
