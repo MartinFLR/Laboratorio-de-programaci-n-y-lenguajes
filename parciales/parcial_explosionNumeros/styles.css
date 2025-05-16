@@ -1,0 +1,27 @@
+.oculto{
+    display: none;
+}
+
+body{
+    justify-items: center;
+    align-items: center;
+}
+
+
+.pagina{
+    display: flex;
+    flex-direction: column;
+}
+
+#contenedorReal{
+    display: grid;
+    grid-template-columns: repeat(2,100px);
+    overflow-y: scroll;
+    max-height: 400px;
+    width: 100%;
+}
+
+.textoArriba{
+    display: flex;
+    gap: 40px;
+}

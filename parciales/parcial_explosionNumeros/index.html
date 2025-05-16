@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Mi Sitio Web</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <div id="page-container">
+        <header>
+            <h1>Explosión de números</h1>
+        </header>
+
+        <section>
+            <article class="pagina">
+
+                <div class="contadores">
+                    <p>Ronda: </p><span id="spanRonda"></span>
+                    <p>Victorias: </p><span id="spanVictorias"></span>
+                    <p>Derrotas: </p><span id="spanDerrotas"></span>
+                    <div class="ultimasPartidas">
+                        <p>Ultimas 5 partidas: </p><span id="span5Partidas"></span>
+                    </div>
+                </div>
+
+                <fieldset>
+                    <legend>Cantidad de palabras</legend>
+                    <label for="selectOpciones">Seleccione una opcion:</label>
+                    <select id="selectOpciones" name="opciones">
+                        <option value="3">Fácil 3 digitos</option>
+                        <option value="5">Normal 5 digitos</option>
+                        <option value="8">Dificil 8 digitos</option>
+                    </select>
+                </fieldset>
+
+                <button id="iniciarJuego">Jugar</button>
+                <button id="nuevaTirada">Nueva tirada</button>
+                <button id="rendirse">Abandonar</button>
+
+                <div class="textoArriba">
+                    <p>Jugador</p>
+                    <p>Maquina</p>
+                </div>
+                <div id="contenedorJuego">
+                </div>
+            </article>  
+        </section>
+
+    
+
+        <footer>
+            <p></p>
+            <!--
+            <p><a href="/politica-privacidad.html"></a></p>
+            -->
+        </footer>
+
+    </div>
+
+    <script src="script.js" ></script>
+</body>
+</html>

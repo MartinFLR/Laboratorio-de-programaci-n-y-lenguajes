@@ -9,11 +9,7 @@ let contadorDerrotas = parseInt(getCookie("contadorDerrotas"));
 document.addEventListener("DOMContentLoaded", function() {
     let botonRendirse = document.getElementById("botonRendirse")
     let botonIniciarJuego = document.getElementById("botonIniciarJuego");
-
-    contadorPartidas = parseInt(getCookie("contadorPartidas"));
-    contadorVictorias = parseInt(getCookie("contadorVictorias"));
-    contadorDerrotas = parseInt(getCookie("contadorDerrotas"));
-
+    
     if(!contadorPartidas && !contadorVictorias && !contadorDerrotas){
         setCookie("contadorPartidas",0,10)
         setCookie("contadorDerrotas",0,10);
