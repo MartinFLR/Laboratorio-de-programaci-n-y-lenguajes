@@ -1,0 +1,36 @@
+<table border="1">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Edad</th>
+      <th>Ciudad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Ana</td>
+      <td>28</td>
+      <td>Madrid</td>
+    </tr>
+    <tr>
+      <td>Carlos</td>
+      <td>35</td>
+      <td>Buenos Aires</td>
+    </tr>
+  </tbody>
+</table>
+
+Explicación:
+
+<table>: define la tabla.
+
+<thead>: sección del encabezado de la tabla.
+
+<tr>: define una fila.
+
+<th>: celda de encabezado (negrita y centrada por defecto).
+
+<td>: celda de datos.
+
+
+
