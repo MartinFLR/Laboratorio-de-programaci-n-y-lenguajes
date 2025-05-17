@@ -1,0 +1,131 @@
+
+<form action="/enviar-respuestas" method="post">
+  <!-- Pregunta de respuesta única (radio) -->
+  <fieldset>
+    <legend>1. ¿Cuál es la capital de Francia?</legend>
+    <label><input type="radio" name="q1" value="a"> Madrid</label><br>
+    <label><input type="radio" name="q1" value="b"> París</label><br>
+    <label><input type="radio" name="q1" value="c"> Berlín</label>
+  </fieldset>
+
+  <!-- Pregunta de respuesta múltiple (checkboxes) -->
+  <fieldset>
+    <legend>2. ¿Cuáles de estos son lenguajes de programación?</legend>
+    <label><input type="checkbox" name="q2[]" value="a"> HTML</label><br>
+    <label><input type="checkbox" name="q2[]" value="b"> Java</label><br>
+    <label><input type="checkbox" name="q2[]" value="c"> CSS</label><br>
+    <label><input type="checkbox" name="q2[]" value="d"> Python</label>
+  </fieldset>
+
+  <!-- Pregunta de una palabra (input texto) -->
+  <fieldset>
+    <legend>3. ¿Cómo se llama el satélite natural de la Tierra?</legend>
+    <input type="text" name="q3">
+  </fieldset>
+
+  <br>
+  <button type="submit">Enviar</button>
+</form>
+
+Explicación:
+
+<form>: contenedor del quiz.
+
+<fieldset> y <legend>: agrupan cada pregunta y muestran un título.
+
+<input type="radio">: para una única respuesta.
+
+<input type="checkbox">: para múltiples respuestas (usamos name="q2[]" para que el servidor reciba un array).
+
+<input type="text">: para una respuesta escrita.
+
+
+
+
+
+
+
+
+con puntaje
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quiz</title>
+</head>
+<body>
+  <form id="quizForm">
+    <!-- Pregunta 1: Respuesta única -->
+    <fieldset>
+      <legend>1. ¿Cuál es la capital de Francia?</legend>
+      <label><input type="radio" name="q1" value="a"> Madrid</label><br>
+      <label><input type="radio" name="q1" value="b"> París</label><br>
+      <label><input type="radio" name="q1" value="c"> Berlín</label>
+    </fieldset>
+
+    <!-- Pregunta 2: Múltiples respuestas -->
+    <fieldset>
+      <legend>2. ¿Cuáles son lenguajes de programación?</legend>
+      <label><input type="checkbox" name="q2" value="HTML"> HTML</label><br>
+      <label><input type="checkbox" name="q2" value="Java"> Java</label><br>
+      <label><input type="checkbox" name="q2" value="CSS"> CSS</label><br>
+      <label><input type="checkbox" name="q2" value="Python"> Python</label>
+    </fieldset>
+
+    <!-- Pregunta 3: Texto -->
+    <fieldset>
+      <legend>3. ¿Cómo se llama el satélite natural de la Tierra?</legend>
+      <input type="text" name="q3">
+    </fieldset>
+
+    <br>
+    <button type="submit">Enviar</button>
+  </form>
+
+  <h2 id="resultado"></h2>
+
+  <script>
+    document.getElementById("quizForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      let puntaje = 0;
+
+      // Respuesta 1
+      const q1 = document.querySelector('input[name="q1"]:checked');
+      if (q1 && q1.value === "b") {
+        puntaje++;
+      }
+
+      // Respuesta 2
+      const correctasQ2 = ["Java", "Python"];
+      const seleccionadasQ2 = Array.from(document.querySelectorAll('input[name="q2"]:checked')).map(cb => cb.value);
+      const aciertosQ2 = seleccionadasQ2.filter(val => correctasQ2.includes(val));
+      const erroresQ2 = seleccionadasQ2.filter(val => !correctasQ2.includes(val));
+      if (aciertosQ2.length === correctasQ2.length && erroresQ2.length === 0) {
+        puntaje++;
+      }
+
+      // Respuesta 3
+      const q3 = document.querySelector('input[name="q3"]').value.trim().toLowerCase();
+      if (q3 === "luna") {
+        puntaje++;
+      }
+
+      // Mostrar resultado
+      document.getElementById("resultado").textContent = `Tu puntaje es: ${puntaje} de 3`;
+    });
+  </script>
+</body>
+</html>
+
+explicación 
+
+Captura el formulario al enviarse.
+
+Revisa cada respuesta:
+
+Radio: compara con el valor correcto.
+
+Checkbox: compara que estén todas las correctas y ninguna incorrecta.
+
+Texto: compara la palabra con toLowerCase() para evitar errores de mayúscul
