@@ -1,3 +1,13 @@
+
+document.addEventListener("DOMContentLoaded",function(){
+
+})
+
+
+
+
+
+//Utils
 function desordenar(array){
     return array.sort(() => Math.random() - 0.5)
 }
@@ -42,9 +52,6 @@ function getCookie(nombre) {
     return null;
 }
 
-`${i}- 🗓️ ${partida.fecha} — 🏆 ${partida.ganador}\n`
-
-
 function $id(id) {
     return document.getElementById(id);
 }
@@ -67,7 +74,3 @@ function crearElemento(tag, id = null, clases = null) {
     }
     return el;
 }
-
-
-
-//<p><a href="/politica-privacidad.html"></a></p>
