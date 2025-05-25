@@ -1,0 +1,89 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: azure;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+}
+
+
+.oculto{
+    display: none;
+}
+
+h1{
+    text-align: center;
+}
+footer{
+    text-align: center;
+}
+.contenedorPrincipal{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+}
+
+.saludo{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    
+}
+
+.ultimoIngreso,
+.visitas,
+.titulo{
+    display: flex;
+    flex-direction: row;
+}
+.formIngresarTarea{
+    text-align: center;
+    
+}
+
+.listadoTareas{
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.areaTareasTerminadas,
+.areaTareasPendientes{
+    padding: 40px;
+    border-style: double;
+    background: cornflowerblue;
+}
+
+.areaIngresoTareas{
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+}
+
+.tarea{
+    display: flex;
+    flex-direction: row;
+    
+}
+
+button{
+    border-radius: 4px;
+}
+
+button:hover{
+    background-color:darksalmon ;
+    cursor:pointer;
+}
+
+.cardContenido{
+    display: flex;
+    flex-direction: column;
+}

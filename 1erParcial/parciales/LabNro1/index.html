@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Parcial</title>
+    <link rel="stylesheet" href="styles.css" />
+
+</head>
+<body>
+
+    <header>
+        <h1>Gestor Personal de tareas</h1>
+    </header>
+
+    <main class="contenedorPrincipal">
+        <section class="login">
+            <article>
+                <div class="cardPrincipal">
+                    
+                    <div class="cardContenido">
+                        <form id="formDatosPersonales">
+                            <fieldset id="datosPersonales">
+                                <legend>Datos personales</legend>
+
+                                <label for="nombre">Nombre</label>
+                                <input type="text" id="nombre" name="nombre">
+
+                                <label for="contrasenia">Contraseña</label>
+                                <input type="password" id="contrasenia" name="contrasenia">
+
+                            </fieldset>
+                        </form>
+                        <button id="botonIngresarPagina">Ingresar</button>
+                    </div>
+
+                </div>
+            </article>  
+        </section>
+
+        <section>
+            <article>
+                <div class="saludo" id="saludo">
+                    <div class="titulo">
+                        <p>Hola!,  </p> <span id="spanSaludoNombre"></span>
+                    </div>
+                    <div class="visitas">
+                        <p>Es tu visita numero: </p> <span id="spanVisitas"></span>
+                    </div>
+                    <div class="ultimoIngreso">
+                        <p>Ultimo Ingreso: </p> <span id="spanUltimoIngreso"></span>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section>
+            <article>
+                <div id="gestorTareas">
+                    <div class="areaIngresoTareas">
+                        <form class="formIngresarTarea"  id="formIngresarTarea">
+                            <fieldset id="ingresarTarea">
+                                <legend>Ingresar Tareas</legend>
+
+                                <label for="tarea">Tarea</label>
+                                <input type="text" id="tarea" name="tarea">
+
+                                <label for="descripcion">Descripcion</label>
+                                <input type="text" id="descripcion" name="descripcion">
+
+                            </fieldset>
+                        </form>
+                        <button id="botonIngresarTarea">+Ingresar Tarea</button>
+                        <button id="botonEliminarTodas">Eliminar Todas las tareas</button>
+
+                    </div>
+
+                    <div class="listadoTareas">
+
+                        <div class="areaTareasPendientes">
+                            <h2>Tareas Pendientes</h2>
+                            <div id="tareasPendientes">
+                                <h3>Nombre</h3>
+                            </div>
+
+                            <button id="finalizarTarea">Finalizar Tarea</button>
+
+                        </div>
+
+                        <div class="areaTareasTerminadas">
+                            <h2>Tareas Terminadas</h2>
+                            <div id="tareasTerminadas">
+                                <h3>Nombre</h3>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </article>
+        </section>
+    </main>
+    
+    <footer>
+        <p>Martín Leonardo Flores</p>
+    </footer>
+
+    <script src="script.js" ></script>
+</body>
+</html>
