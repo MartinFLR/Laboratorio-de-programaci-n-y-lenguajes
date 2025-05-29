@@ -73,7 +73,7 @@ class CookieManager {
         return $default;
     }
     
-
+    //Para comprobar si una cookie tiene un valor específico, por ejemplo para validaciones simples.
     public function hasValue(string $name, string $expectedValue): bool {
         return isset($_COOKIE[$name]) && $_COOKIE[$name] === $expectedValue;
     }
