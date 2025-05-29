@@ -24,11 +24,20 @@ if ($cookieManager->exists('usuario') && $cookieManager->exists('cantidad')) {
     </header>
 
     <main class="contenedorPrincipal">
-        <?php if ($cookieManager->exists('usuario') && $cookieManager->exists('cantidad')): ?>
-            <p>👋 ¡Bienvenido, <strong><?= htmlspecialchars($cookieManager->get('usuario')) ?></strong>!</p>
-            <p>Ingresaste una cantidad de, <strong><?= htmlspecialchars($visitas) ?></strong> veces!</p>
-            <p>Seleccionaste <strong><?= htmlspecialchars($cookieManager->get('cantidad')) ?></strong>!</p>
-            <p><a href="borrar_cookie.php">¿No sos vos? Hacé clic aquí</a></p>
+    <?php if ($cookieManager->exists('usuario') && $cookieManager->exists('cantidad')): 
+        require_once 'CookieManager.php';
+        // Obtenemos y limpiamos las variables para evitar inyección HTML
+        $usuario = htmlspecialchars($cookieManager->get('usuario'));
+        $cantidad = htmlspecialchars((string)$cookieManager->getInt('cantidad'));
+
+        $gestorJuego = new GestorJuego($cantidad)
+
+        ?>
+        <p>👋 ¡Bienvenido, <strong><?= $usuario ?></strong>!</p>
+        <p>Ingresaste una cantidad de, <strong><?= $visitas ?></strong> veces!</p>
+        <p>Seleccionaste <strong><?= $cantidad ?></strong>!</p>
+        <p><a href="borrar_cookie.php">¿No sos vos? Hacé clic aquí</a></p>
+
         <?php else: ?>
             <form method="post" action="validar.php">
                 <fieldset>
