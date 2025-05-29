@@ -19,6 +19,11 @@ class ArrayUtils {
         return $arr;
     }
 
+    public static function toString(array $arr): string {
+        return implode("-", $arr);
+    }
+
+
     //Agrupa elementos por un criterio dado, devolviendo un array con claves según el criterio. Muy útil para clasificar datos.
     public static function groupBy(array $arr, callable $callback): array {
         $result = [];

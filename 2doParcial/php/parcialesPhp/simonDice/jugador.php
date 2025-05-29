@@ -5,7 +5,7 @@ class Jugador {
     public function __construct() {
     }
 
-    private function isDead():boolean{
+    private function isDead():bool{
         return $this->vidas == 0;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'CookieManager.php';
 
 // Inicializar con configuración segura y duración 7 días
@@ -26,12 +27,14 @@ if ($cookieManager->exists('usuario') && $cookieManager->exists('cantidad')) {
     <main class="contenedorPrincipal">
     <?php if ($cookieManager->exists('usuario') && $cookieManager->exists('cantidad')): 
         require_once 'CookieManager.php';
+        require_once 'gestorJuego.php';
+
         // Obtenemos y limpiamos las variables para evitar inyección HTML
         $usuario = htmlspecialchars($cookieManager->get('usuario'));
         $cantidad = htmlspecialchars((string)$cookieManager->getInt('cantidad'));
 
-        $gestorJuego = new GestorJuego($cantidad)
-
+        $gestorJuego = new GestorJuego($cantidad);
+        $gestorJuego->generarPantalla();
         ?>
         <p>👋 ¡Bienvenido, <strong><?= $usuario ?></strong>!</p>
         <p>Ingresaste una cantidad de, <strong><?= $visitas ?></strong> veces!</p>
