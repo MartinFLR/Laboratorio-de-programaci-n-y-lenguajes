@@ -1,102 +1,112 @@
 <?php
+declare(strict_types=1);
+
 require_once 'jugador.php';
 require_once 'arrayUtils.php';
 require_once 'sessionManager.php';
+
 class GestorJuego {
     public const COLORES = ["R", "A", "Y", "V"];
-    private SessionManager $SessionManager;
+
+    private SessionManager $session;
     public Jugador $jugador;
     public int $cantidad;
-    public int $turno = 1;
-    private array $arraySecuencia = [];
-    private array $arrayMostrar = [];
-    public array $arraySecreto = [];
+    public int $turno;
+    private array $arraySecuencia;
+    public array $arraySecreto;
 
-    public function __construct(int $cantidad) {
-        $this->SessionManager = new SessionManager();
-        $this->cantidad = $cantidad;
-        if(!$this->SessionManager->get("arraySecuencia") && !$this->SessionManager->get("arrayMostrar")
-        && !$this->SessionManager->get("arraySecreto") && !$this->SessionManager->get("jugador")
-        ){
-            $this->jugador = new Jugador();
-            $this->SessionManager->set("jugador",$this->jugador);
-            $this->generarArray();
-            $this->generarArrayMostrar();
-            $this->generarArraySecreto();
-        }else{
-            $this->arraySecuencia = $this->SessionManager->get("arraySecuencia");
-            $this->jugador = $this->SessionManager->get("jugador");
-            $this->arrayMostrar = $this->SessionManager->get("arrayMostrar");
-            $this->arraySecreto = $this->SessionManager->get("arraySecreto");
+    public function __construct() {
+        $this->session = new SessionManager();
+        $this->cantidad = (int) ($this->session->get("cantidad") ?? 0);
 
-        };
+        $this->turno = $this->session->get("turno") ?? 0;
+        $this->jugador = $this->session->get("jugador") ?? new Jugador();
+        $this->arraySecuencia = $this->session->get("arraySecuencia") ?? $this->generarSecuencia();
+        $this->arraySecreto = $this->session->get("arraySecreto") ?? $this->generarSecreto();
+
+        // Siempre guardar jugador en sesión si es nuevo
+        $this->guardarEstado();
     }
 
-    //Tengo que ver si este get esta bien, o si hago directamente publico $cantidad
+    private function generarSecuencia(): array {
+        $secuencia = [];
+        for ($i = 0; $i < $this->cantidad; $i++) {
+            $secuencia[] = ArrayUtils::randomValue(self::COLORES);
+        }
+        $this->session->set("arraySecuencia", $secuencia);
+        return $secuencia;
+    }
+
+    private function generarSecreto(): array {
+        $secreto = array_slice($this->arraySecuencia, 0, $this->turno + 1);
+        $this->session->set("arraySecreto", $secreto);
+        return $secreto;
+    }
+
+    public function validarRespuesta(string $respuesta): bool {
+        $respuestaArray = str_split(strtoupper(trim($respuesta)));
+
+        if ($respuestaArray === $this->arraySecreto) {
+            // Victoria total si coincide con la secuencia completa
+            if ($respuestaArray === $this->arraySecuencia) {
+                $this->victoriaPartida();
+            }
+
+            $this->turno++;
+            $this->arraySecreto = $this->generarSecreto();
+            $this->session->set("turno", $this->turno);
+            return true;
+        }
+
+        // Si falló
+        $this->jugador->restarVida();
+        $this->session->set("jugador", $this->jugador);
+
+        if ($this->jugador->getVida() === 0) {
+            $this->derrotaPartida();
+        }
+
+        return false;
+    }
+
     public function getVidaActual(): int {
         return $this->jugador->getVida();
     }
-    private function generarArray(){
-        for($i = 0; $i < $this->cantidad; $i++){
-        $valorRandom = ArrayUtils::randomValue(self::COLORES);
-        array_push($this->arraySecuencia,$valorRandom);
-        };
-        $this->SessionManager->set("arraySecuencia",$this->arraySecuencia);
+
+    public function reiniciarJuego(): void {
+        session_destroy();
+
     }
 
-    public function generarArrayMostrar(){
-        $this->arrayMostrar = array();
-        for($i = 0; $i < $this->turno; $i++){
-            array_push($this->arrayMostrar,$this->arraySecuencia[$i]);
-        };
-            $this->SessionManager->set("arrayMostrar",$this->arrayMostrar);
+    private function guardarEstado(): void {
+        $this->session->set("turno", $this->turno);
+        $this->session->set("jugador", $this->jugador);
+        $this->session->set("arraySecuencia", $this->arraySecuencia);
+        $this->session->set("arraySecreto", $this->arraySecreto);
     }
 
-    public function generarArraySecreto(){
-        $this->arraysecreto = array();
-
-
-
-        for($i = 0; $i < ($this->turno+1); $i++){
-            array_push($this->arraySecreto,$this->arraySecuencia[$i]);
-        };
-            $this->SessionManager->set("arraySecreto",$this->arraySecreto);
+    private function derrotaPartida(): void {
+        $_SESSION['resultado'] = 'derrota';
+        $_SESSION['mensaje'] = '¡Perdiste! Intenta de nuevo.';
+        header("Location: fin.php");
+        exit;
     }
 
-    public function validarRespuesta(String $respuesta):bool{
-        $arrayRespuesta = str_split($respuesta);
-        if($arrayRespuesta == $this->arraySecreto){
-            $this->turno++;
-            $this->generarArrayMostrar();
-            $this->generarArraySecreto();
-            return true;
-        }else{
-            $this->jugador->restarVida();
-            return false;
-        }
+    private function victoriaPartida(): void {
+        $_SESSION['resultado'] = 'victoria';
+        $_SESSION['mensaje'] = '¡Felicidades! Ganaste el juego.';
+        header("Location: fin.php");
+        exit;
     }
 
-
-    public function generarPantallaInit(){
-        $arrayToString = ArrayUtils::toString($this->arraySecreto);
+    public function generarPantallaInit(): void {
+        $arrayToString = implode('', $this->arraySecreto);
 
         echo "<form method='post' action='validarJugada.php'>
-        
-        <div>
-            <label for='respuesta'>Ingrese la secuencia</label>
-            <input type='text' id='respuesta' name='respuesta' placeholder='Escriba toda la secuencia completa' required>
-        </div>
-        
-        <button id='botonEnviar'>Enviar</button>
-
-        </form>";
-
-
-        echo "<div>
-        solucion: $arrayToString
-    
-        
-        </div>";
+                <label for='respuesta'>Ingrese la secuencia:</label>
+                <input type='text' id='respuesta' name='respuesta' required>
+                <button type='submit'>Enviar</button>
+            </form>
+            <div><strong>Solución (debug):</strong> $arrayToString</div>";
     }
-
 }
