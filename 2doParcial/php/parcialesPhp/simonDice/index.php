@@ -34,7 +34,7 @@ if ($cookieManager->exists('usuario') && $cookieManager->exists('cantidad')) {
         $cantidad = htmlspecialchars((string)$cookieManager->getInt('cantidad'));
 
         $gestorJuego = new GestorJuego($cantidad);
-        $gestorJuego->generarPantalla();
+        $gestorJuego->generarPantallaInit();
         ?>
         <p>👋 ¡Bienvenido, <strong><?= $usuario ?></strong>!</p>
         <p>Ingresaste una cantidad de, <strong><?= $visitas ?></strong> veces!</p>
