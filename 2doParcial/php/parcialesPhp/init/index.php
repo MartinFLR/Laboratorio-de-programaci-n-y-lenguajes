@@ -15,6 +15,7 @@ $sessionManager = new SessionManager();
     <main>
         <?php
         if ($sessionManager->exists('user')){
+            /** @var User $user */
             $user = $sessionManager->get('user');
             $user->incrementarVisitas();
             $sessionManager->set('user', $user);

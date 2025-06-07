@@ -11,8 +11,8 @@ $sesion = new SessionManager();
 if (isset($_SESSION['user']))
 {	
 	$cookieManager = new CookieManager();
-	$usuario = $sesion->get('user');
-	$cookieManager->setJson($usuario->getNombre(),$usuario->toArray());
+	$user = $sesion->get('user');
+	$cookieManager->setJson($user->getNombre(),$user->toArray());
 	$_SESSION[] = array();
 	session_destroy();
 	header("Location: index.php");

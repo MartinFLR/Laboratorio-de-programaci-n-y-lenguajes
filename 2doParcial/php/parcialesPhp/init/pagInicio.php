@@ -14,7 +14,6 @@ $sessionManager = new SessionManager();
     <header><h3>Gestor</h3></header>
     <main>
         <?php
-        
         ?>
     </main>
 </body>
