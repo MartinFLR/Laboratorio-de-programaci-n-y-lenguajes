@@ -42,6 +42,15 @@ class User {
         $this->tareasActivas = $tareasActivas;
     }
 
+    public function eliminarTareaActiva(int $indice): void {
+        if (isset($this->tareasActivas[$indice])) {
+            unset($this->tareasActivas[$indice]);
+            // Reindexar para que los índices no se rompan
+            $this->tareasActivas = array_values($this->tareasActivas);
+        }
+    }
+    
+
     // Tareas Pendientes
     public function getTareasPendientes(): array {
         return $this->tareasPendientes;
@@ -55,6 +64,15 @@ class User {
         $this->tareasPendientes = $tareasPendientes;
     }
 
+    public function eliminarTareaPendiente(int $indice): void {
+        if (isset($this->tareasPendientes[$indice])) {
+            unset($this->tareasPendientes[$indice]);
+            // Reindexar para que los índices no se rompan
+            $this->tareasPendientes = array_values($this->tareasPendientes);
+        }
+    }
+    
+
     // Tareas Finalizadas
     public function getTareasFinalizadas(): array {
         return $this->tareasFinalizadas;
@@ -67,6 +85,21 @@ class User {
     public function setTareasFinalizadas(array $tareasFinalizadas): void {
         $this->tareasFinalizadas = $tareasFinalizadas;
     }
+
+    public function eliminarTareaFinalizada(int $indice): void {
+        if (isset($this->tareasFinalizadas[$indice])) {
+            unset($this->tareasFinalizadas[$indice]);
+            // Reindexar para que los índices no se rompan
+            $this->tareasFinalizadas = array_values($this->tareasFinalizadas);
+        }
+    }
+
+    public function eliminarTodasTareas(): void {
+        $this->tareasActivas = [];
+        $this->tareasPendientes = [];
+        $this->tareasFinalizadas = [];
+    }
+    
 
 
 

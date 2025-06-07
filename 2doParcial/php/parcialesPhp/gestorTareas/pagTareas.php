@@ -56,5 +56,97 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ingresarTarea'])) {
     exit;
 }
 
+if (isset($_POST['pasarActivas'])) {
+    if (!empty($_POST['pendiente'])) {
+        $seleccionadas = $_POST['pendiente']; // Array de índices
+
+        // Obtener tareas pendientes actuales
+        $tareasPendientes = $foundUser->getTareasPendientes();
+
+        foreach ($seleccionadas as $indice) {
+            if (isset($tareasPendientes[$indice])) {
+                $tarea = $tareasPendientes[$indice];
+                $foundUser->agregarTareaActiva($tarea);
+                $foundUser->eliminarTareaPendiente((int)$indice);
+            }
+        }
+
+        // Actualizar sesión
+        $sessionManager->set('userActual', $foundUser->toArray());
+
+        // Actualizar almacenamiento persistente
+        $users = $sessionManager->getJson('users', []);
+        foreach ($users as $i => $userData) {
+            if ($userData['user_id'] === $foundUser->getId()) {
+                $users[$i] = $foundUser->toArray();
+                break;
+            }
+        }
+        $sessionManager->setJson('users', $users);
+
+        header('Location: pagTareas.php');
+        exit;
+    } 
+}
+
+
+if (isset($_POST['pasarFinalizadas'])) {
+    if (!empty($_POST['pendiente'])) {
+        $seleccionadas = $_POST['pendiente']; // Array de índices
+
+        // Obtener tareas pendientes actuales
+        $tareasFinalizadas = $foundUser->getTareasActivas();
+
+        foreach ($seleccionadas as $indice) {
+            if (isset($tareasFinalizadas[$indice])) {
+                $tarea = $tareasFinalizadas[$indice];
+                $foundUser->agregarTareaFinalizada($tarea);
+                $foundUser->eliminarTareaActiva((int)$indice);
+            }
+        }
+
+        // Actualizar sesión
+        $sessionManager->set('userActual', $foundUser->toArray());
+
+        // Actualizar almacenamiento persistente
+        $users = $sessionManager->getJson('users', []);
+        foreach ($users as $i => $userData) {
+            if ($userData['user_id'] === $foundUser->getId()) {
+                $users[$i] = $foundUser->toArray();
+                break;
+            }
+        }
+        $sessionManager->setJson('users', $users);
+
+        header('Location: pagTareas.php');
+        exit;
+    }
+
+}
+
+
+if (isset($_POST['borrarTodas'])) {
+        // Obtener tareas pendientes actuales
+        $foundUser->eliminarTodasTareas();
+
+        // Actualizar sesión
+        $sessionManager->set('userActual', $foundUser->toArray());
+
+        // Actualizar almacenamiento persistente
+        $users = $sessionManager->getJson('users', []);
+        foreach ($users as $i => $userData) {
+            if ($userData['user_id'] === $foundUser->getId()) {
+                $users[$i] = $foundUser->toArray();
+                break;
+            }
+        }
+        $sessionManager->setJson('users', $users);
+
+        header('Location: pagTareas.php');
+        exit;
+    }
+
+
+
 mostrarGestorTareas($foundUser);
 volver();

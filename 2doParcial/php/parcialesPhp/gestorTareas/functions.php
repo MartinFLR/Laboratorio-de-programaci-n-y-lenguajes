@@ -84,29 +84,72 @@ function mostrarGestorTareas(User $user) {
         <div class="tableros">
             <div class="tareasPendientes">
                 <h3>Tareas pendientes</h3>
-                <?php
-                foreach ($user->getTareasPendientes() as $data) {
-                    echo "<p>" . nl2br(htmlspecialchars($data)) . "</p>";
-                }
-                ?>
+                
+                    <form name="formTarea" action="pagTareas.php" method="POST">
+                        <table>
+                            <tbody>
+                                <?php
+                                $i = 0;
+                                foreach ($user->getTareasPendientes() as $data) {
+                                    echo '<tr>';
+                                    echo '<td><input type="checkbox" id="idP' . $i . '" name="pendiente[]" value="' . $i . '"></td>';
+                                    echo '<td><label for="idP' . $i . '">' . htmlspecialchars($data) . '</label></td>';
+                                    echo '</tr>';
+                                    $i++;
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                        <div>
+                            <button type="submit" name="pasarActivas">Pasar a activa</button>
+                        </div>
+                    </form>
             </div>
 
             <div class="tareasActivas">
-                <h3>Tareas activas</h3>
-                <?php
-                foreach ($user->getTareasActivas() as $data) {
-                    echo "<p>" . nl2br(htmlspecialchars($data)) . "</p>";
-                }
-                ?>
+            <h3>Tareas activas</h3>
+                <form name="formTarea" action="pagTareas.php" method="POST">
+                    <table>
+                        <tbody>
+                            <?php
+                            $i = 0;
+                            foreach ($user->getTareasActivas() as $data) {
+                                echo '<tr>';
+                                echo '<td><input type="checkbox" id="idP' . $i . '" name="pendiente[]" value="' . $i . '"></td>';
+                                echo '<td><label for="idP' . $i . '">' . htmlspecialchars($data) . '</label></td>';
+                                echo '</tr>';
+                                $i++;
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                    <div>
+                        <button type="submit" name="pasarFinalizadas">Pasar a finalizadas</button>
+                    </div>
+                </form>         
             </div>
 
             <div class="tareasFinalizadas">
                 <h3>Tareas finalizadas</h3>
-                <?php
-                foreach ($user->getTareasFinalizadas() as $data) {
-                    echo "<p>" . nl2br(htmlspecialchars($data)) . "</p>";
-                }
-                ?>
+            <form name="formTarea" action="pagTareas.php" method="POST">
+                <table>
+                    <tbody>
+                        <?php
+                        $i = 0;
+                        foreach ($user->getTareasFinalizadas() as $data) {
+                            echo '<tr>';
+                            echo '<td><label for="idP' . $i . '">' . htmlspecialchars($data) . '</label></td>';
+                            echo '</tr>';
+                            $i++;
+                        }
+                        ?>
+                    </tbody>
+                </table>
+                <div>
+                    <button type="submit" name="borrarTodas">Borrar todas</button>
+                </div>
+            </form>         
+
             </div>
         </div>
     </div>
