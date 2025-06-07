@@ -15,12 +15,16 @@ $sessionManager = new SessionManager();
     <main>
         <?php
         if ($sessionManager->exists('user')){
-            $usuario = $sessionManager->get('user');
-            echo "<strong>Bienvenido de vuelta  ".$usuario->getNombre()."</strong><br>";
+            $user = $sessionManager->get('user');
+            $user->incrementarVisitas();
+            $sessionManager->set('user', $user);
+            echo "<strong>Bienvenido de vuelta  ".$user->getNombre()."</strong><br>";
+            echo "<strong>Nos visitaste  ".$user->getVisitas()." Veces!</strong><br>";
             echo "<a href='pagInicio.php'>Ingresar a pagina</a>";
             echo "<a href='cierreSesion.php'>Cerrar Sesion</a>";
+
         } else {
-            
+
         formularioInicioSesion();
         }
         ?>

@@ -5,10 +5,12 @@ class User {
     private array $tareasActivas;
     private array $tareasPendientes;
     private array $tareasFinalizadas;
+    private int $visitas;
 
     public function __construct(string $nombre, string $contra) {
         $this->nombre = $nombre;
         $this->contra = $contra;
+        $this->visitas = 0;
         $this->tareasActivas = [];
         $this->tareasPendientes = [];
         $this->tareasFinalizadas = [];
@@ -26,6 +28,16 @@ class User {
     public function getId(){
         return $this->user_id;
     }
+
+
+    public function getVisitas(): int {
+        return $this->visitas;
+    }
+    
+    public function incrementarVisitas(): void {
+        $this->visitas++;
+    }
+
 
     // Tareas Activas
     public function getTareasActivas(): array {
@@ -108,6 +120,9 @@ class User {
         );
 
         // Setear tareas si existen
+        if (isset($data['visitas'])) {
+            $user->visitas = $data['visitas'];
+        }
         if (isset($data['tareasActivas']) && is_array($data['tareasActivas'])) {
             $user->setTareasActivas($data['tareasActivas']);
         }
@@ -126,6 +141,7 @@ class User {
         return [
             'nombre' => $this->nombre,
             'contra' => $this->contra,
+            'visitas' => $this->visitas,
             'tareasActivas' => $this->tareasActivas,
             'tareasPendientes' => $this->tareasPendientes,
             'tareasFinalizadas' => $this->tareasFinalizadas

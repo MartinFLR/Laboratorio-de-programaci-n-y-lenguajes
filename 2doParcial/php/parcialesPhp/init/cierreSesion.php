@@ -5,10 +5,6 @@ require_once 'cookieManager.php';
 $sesion = new SessionManager();
 ?>
 <html>
-<head>
-<title>Sesiones - P&aacute;gina 1</title>
-</head>
-
 <body>
 <?php
 
