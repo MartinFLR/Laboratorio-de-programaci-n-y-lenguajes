@@ -5,7 +5,7 @@ class Jugador {
     private int $puntaje;
     private int $intentos;
     private array $numerosIngresados;
-    private bool $rendido;
+    private bool $rendido = false;
 
     public function __construct(string $nombre) {
         $this->nombre = $nombre;

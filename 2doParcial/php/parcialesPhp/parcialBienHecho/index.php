@@ -3,6 +3,8 @@ require_once 'jugador.php';
 require_once 'gestorJuego.php';
 
 //antes de sessionStart()
+
+
 $partidasJugadas = 0;
 if (isset($_COOKIE['partidas_jugadas'])) {
     $partidasJugadas = intval($_COOKIE['partidas_jugadas']);
@@ -38,30 +40,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $mensaje = "Ingresa un número entero positivo.";
         }
+    } elseif (isset($_POST['rendirse'])) {
+        $jugador->rendirse();
+        $mensaje = "Te has rendido. Fin del juego.";
+
+        $partidasJugadas++;
+        setcookie('partidas_jugadas', $partidasJugadas, time() + 60 * 60 * 24 * 30, '/');
     } elseif (isset($_POST['reiniciar'])) {
-        $gestor->reiniciar();
+        $jugador->reiniciar();
+        $gestor = new GestorJuego($jugador);
+
         $mensaje = "Juego reiniciado. Comenzando juego #" . $partidasJugadas;
 
-        // Incrementar contador de partidas jugadas y actualizar cookie
         $partidasJugadas++;
-        // La cookie dura 30 días, ruta '/' para toda la web
         setcookie('partidas_jugadas', $partidasJugadas, time() + 60*60*24*30, '/');
-    } elseif (isset($_POST['rendirse'])) {
-    $jugador->rendirse();
-    $mensaje = "Te has rendido. Fin del juego.";
+    }
 
-    // Incrementar contador de partidas jugadas y actualizar cookie
-    $partidasJugadas++;
-    setcookie('partidas_jugadas', $partidasJugadas, time() + 60 * 60 * 24 * 30, '/');
-
-    // Reiniciar juego completamente creando un nuevo GestorJuego
-    $gestor = new GestorJuego($jugador);
-}
-
-    // Guardar cambios en sesión
     $_SESSION['jugador'] = serialize($jugador);
     $_SESSION['gestor'] = serialize($gestor);
 }
+
 ?>
 
 <!DOCTYPE html>
