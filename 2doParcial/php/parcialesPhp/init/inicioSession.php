@@ -10,7 +10,7 @@ $sessionManager = new SessionManager();
         $usernameIngresado = trim($_POST['nombre']);
         $contraIngresada = trim($_POST['password']);
         
-        //aca si puso recordarme lo guardo
+        //recordarme checkbox
         if (isset($_POST['remember']) && $_POST['remember'] == '1') {
             setcookie('remembered_user', $usernameIngresado, time() + (30 * 24 * 60 * 60), "/");
             setcookie('remembered_pass', $contraIngresada, time() + (30 * 24 * 60 * 60), "/");
