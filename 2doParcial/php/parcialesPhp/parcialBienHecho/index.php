@@ -3,8 +3,6 @@ require_once 'jugador.php';
 require_once 'gestorJuego.php';
 
 //antes de sessionStart()
-
-
 $partidasJugadas = 0;
 if (isset($_COOKIE['partidas_jugadas'])) {
     $partidasJugadas = intval($_COOKIE['partidas_jugadas']);
