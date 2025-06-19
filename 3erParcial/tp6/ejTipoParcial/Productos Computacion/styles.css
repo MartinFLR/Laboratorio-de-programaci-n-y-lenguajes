@@ -1,0 +1,88 @@
+/* styles.css */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #f9f9f9;
+  margin: 0;
+  color: #333;
+  line-height: 1.6;
+}
+
+header,
+footer {
+  background-color: #0078d7;
+  color: white;
+  text-align: center;
+  padding: 1.5rem 1rem;
+}
+
+header h1 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.8rem;
+}
+
+footer p {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.contenedorPrincipal {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  background: white;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  border-radius: 6px;
+}
+
+#busqueda {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  transition: border-color 0.3s ease;
+}
+
+#busqueda:focus {
+  outline: none;
+  border-color: #0078d7;
+  box-shadow: 0 0 6px #0078d7aa;
+}
+
+#resultado {
+  min-height: 150px;
+}
+
+/* Si usas listas para resultados, estilo ejemplo */
+#resultado ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+#resultado li {
+  padding: 10px 12px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#resultado li:hover {
+  background-color: #f0f8ff;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .contenedorPrincipal {
+    margin: 1rem;
+    padding: 1rem;
+  }
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Productos computacion</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Productos computacion</h1>
+    </header>
+
+    <main class="contenedorPrincipal">
+      <div id="productos"></div>
+      <div id="detalle">
+        <button id="btnVolver" style="display: none; margin-bottom: 1rem">
+          ← Volver
+        </button>
+      </div>
+
+<div
+  id="formAgregarStock"
+  style="
+    display: none;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 300px;
+  "
+>
+  <h4>Agregar stock a sucursal: <span id="nombreSucursal"></span></h4>
+  <form id="formAgregarStockForm">
+    <input type="hidden" name="codigo" id="inputCodigo" value="" />
+    <input type="hidden" name="sucursal" id="inputSucursal" value="" />
+    <label for="cantidadAgregar">Cantidad a agregar:</label>
+    <input
+      type="number"
+      id="cantidadAgregar"
+      name="cantidad"
+      min="1"
+      required
+    />
+    <br /><br />
+    <button type="submit">Agregar</button>
+    <button type="button" id="btnCancelar">Cancelar</button>
+  </form>
+</div>
+
+      </div>
+    </main>
+
+    <footer>
+      <p>Martín Leonardo Flores</p>
+    </footer>
+
+    <script src="js/agregarStock.js"></script>
+    <script src="js/formAgregarStock.js"></script>
+    <script src="js/busqueda.js"></script>
+    <script src="js/detalle.js"></script>
+    <script src="js/eventListeners.js"></script>
+    <!--<script type="module" src="js/eventListeners.js"></script>-->
+  </body>
+</html>

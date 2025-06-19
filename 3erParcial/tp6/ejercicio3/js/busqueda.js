@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function buscarProducto() {
     //tomo el valor que el usuario escribio
-    const nombre = document.getElementById("busqueda").value;
+    const descripcion = document.getElementById("busqueda").value;
 
     //creo el objeto Ajax(XMLHttpRequest)
     //permite hacer una petición al servidor sin recargar la página
@@ -21,7 +21,7 @@ function buscarProducto() {
 
     // Prepara la solicitud GET
     //Le pasa como parámetro nombre en la URL
-    //encodeURIComponent(nombre) asegura que el texto vaya bien codificado (por ejemplo si hay espacios o acentos)
-    xhr.open("GET", "buscar.php?nombre=" + encodeURIComponent(nombre), true);
+    //encodeURIComponent(descripcion) asegura que el texto vaya bien codificado (por ejemplo si hay espacios o acentos)
+    xhr.open("GET", "buscar.php?descripcion=" + encodeURIComponent(descripcion), true);
     xhr.send();
 }
