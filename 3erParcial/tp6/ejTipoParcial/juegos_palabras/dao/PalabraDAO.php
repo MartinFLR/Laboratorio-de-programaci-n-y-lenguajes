@@ -3,24 +3,6 @@ require_once __DIR__ . '/../baseDatos.php';
 require_once __DIR__ . '/../clases/Palabra.php';
 
 class PalabraDAO {
-    public static function buscarTodas() {
-        $conn = Database::getConnection();
-        $stmt = $conn->prepare("SELECT * FROM palabras");
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $palabras = [];
-
-        while ($row = $result->fetch_assoc()) {
-            $palabras[] = new Palabra(
-                $row['idPalabra'],
-                $row['palabra'],
-                $row['dificultadPalabra'],
-                $row['acertada']
-            );
-        }
-
-        return $palabras;
-    }
 
 
     public static function buscarRandom() {
@@ -65,6 +47,32 @@ public static function aumentarAcertada(int $idPalabra): bool {
 
         return $stmt->affected_rows > 0;
     }
+
+
+
+
+
+
+//Los metodos de abajo no los uso, pero pueden ser utiles dependiendo el caso, basicamente hago un CRUD
+    public static function buscarTodas() {
+        $conn = Database::getConnection();
+        $stmt = $conn->prepare("SELECT * FROM palabras");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $palabras = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $palabras[] = new Palabra(
+                $row['idPalabra'],
+                $row['palabra'],
+                $row['dificultadPalabra'],
+                $row['acertada']
+            );
+        }
+
+        return $palabras;
+    }
+
 
 public static function subirPalabra(Palabra $palabra) {
     $conn = Database::getConnection();

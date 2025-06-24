@@ -22,7 +22,7 @@ class GestorJuego {
         $this->palabra = PalabraDAO::buscarRandom();
         if (!$this->palabra) throw new Exception("No se pudo seleccionar una palabra");
         
-        $this->pistasTotales = PistaDAO::obtenerPorIdPalabra($this->palabra->getId());
+        $this->pistasTotales = PistaDAO::obtenerPistasPorIdPalabra($this->palabra->getId());
         $this->puntaje = 80;
         $this->pistasMostradas = [];
         $this->indicePista = 0;

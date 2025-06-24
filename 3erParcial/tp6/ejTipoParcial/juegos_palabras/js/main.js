@@ -87,6 +87,12 @@ function arriesgarPalabra() {
     return;
   }
 
+  //XMLHttpReques funciona asi wachin
+  //1.Creamos el objeto y configuramos la petición:
+  //2.Definimos qué hacer cuando llegue la respuesta:
+  //3.Finalmente enviamos la petición con los datos:
+  //Por eso recien al final vemos que enviamos el json
+
   const xhr = new XMLHttpRequest();
   xhr.open("POST", "api/procesarIntento.php", true);
   xhr.setRequestHeader("Content-Type", "application/json");

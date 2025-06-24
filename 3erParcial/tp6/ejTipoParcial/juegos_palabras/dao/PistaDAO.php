@@ -4,7 +4,7 @@ require_once __DIR__ . '/../clases/pista.php';
 
 class PistaDAO {
 
-public static function obtenerPorIdPalabra($idPalabra) {
+public static function obtenerPistasPorIdPalabra($idPalabra) {
         $conn = Database::getConnection();
 
         $sql = "SELECT * FROM pistas WHERE idPalabra = ? ORDER BY ordenPista ASC";
