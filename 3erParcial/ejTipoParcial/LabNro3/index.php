@@ -2,8 +2,9 @@
 <html>
 <head>
     <title>LabNro3</title>
+    <!--
     <link rel="stylesheet" href="styles.css" />
-
+    -->
 </head>
 <body>
     <header>
