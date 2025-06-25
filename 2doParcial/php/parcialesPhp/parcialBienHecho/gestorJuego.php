@@ -70,4 +70,6 @@ class GestorJuego {
         return $this->jugador->getNumerosIngresados();
     }
 
+
+
 }
