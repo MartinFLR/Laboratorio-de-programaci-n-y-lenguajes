@@ -11,9 +11,6 @@
         <h2>Información de la palabra</h2>
         <div id="informacion"></div>  
 
-        <h2>Pistas</h2>
-        <div id="pistas"></div>  
-
         <h2>Filtros</h2>
             <select id="ciudadesOrigen" name="ciudadesOrigen">
                 <option value="">Seleccione una ciudad</option>
