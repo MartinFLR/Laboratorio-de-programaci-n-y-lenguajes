@@ -1,3 +1,6 @@
 [submodule "aldo"]
 	path = aldo
 	url = https://github.com/Flexxing0/HTMLworskpace.git
+[submodule "LPL-PHP-MYSQL"]
+	path = LPL-PHP-MYSQL
+	url = https://github.com/MontielNico/LPL-PHP-MYSQL
