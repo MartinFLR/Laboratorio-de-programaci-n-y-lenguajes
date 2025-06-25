@@ -5,7 +5,6 @@ require_once __DIR__ . '/../clases/GestionViajes.php';
 
 $gestor = new GestionViajes();
 $gestor->iniciarPagina(); 
-$_SESSION['gestor'] = $gestor;
 
 header('Content-Type: application/json');
 
