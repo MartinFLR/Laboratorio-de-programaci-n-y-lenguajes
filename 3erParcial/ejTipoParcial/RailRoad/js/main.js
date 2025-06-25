@@ -59,6 +59,7 @@ function filtrar() {
 
   const xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
+  xhr.withCredentials = true;
 
   xhr.onload = () => {
     if (xhr.status === 200) {
