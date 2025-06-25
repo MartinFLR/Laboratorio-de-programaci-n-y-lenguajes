@@ -25,33 +25,5 @@ $gestor = $_SESSION['gestor'];
 $servicios = $gestor->filtrar($data['ciudadOrigen'], $data['ciudadDestino']);
 $_SESSION['gestor'] = $gestor;
 
-$resultados = [];
-foreach ($servicios as $servicio) {
-    $empresa = $servicio->getEmpresa(); // Obtener empresa para incluir info
 
-    $obj = new stdClass();
-    $obj->idServicio = $servicio->getIdServicio();
-    $obj->nroServicio = $servicio->getNroServicio();
-    $obj->ciudadOrigenServicio = $servicio->getCiudadOrigenServicio();
-    $obj->ciudadDestinoServicio = $servicio->getCiudadDestinoServicio();
-    $obj->estacionOrigenServicio = $servicio->getEstacionOrigenServicio();
-    $obj->estacionDestinoServicio = $servicio->getEstacionDestinoServicio();
-    $obj->horaSalidaServicio = $servicio->getHoraSalidaServicio();
-    $obj->horaLlegadaServicio = $servicio->getHoraLlegadaServicio();
-    $obj->frecuenciaServicio = $servicio->getFrecuenciaServicio();
-    $obj->precioServicio = $servicio->getPrecioServicio();
-    $obj->idEmpresa = $servicio->getIdEmpresa();
-
-    if ($empresa) {
-        $obj->empresa = new stdClass();
-        $obj->empresa->id = $empresa->getIdEmpresa();
-        $obj->empresa->nombre = $empresa->getNombreEmpresa();
-        $obj->empresa->pais = $empresa->getPaisEmpresa();
-        $obj->empresa->web = $empresa->getWebEmpresa();
-        $obj->empresa->logo = $empresa->getLogoEmpresa();
-    }
-
-    $resultados[] = $obj;
-}
-
-echo json_encode($resultados);
+echo json_encode($servicios);

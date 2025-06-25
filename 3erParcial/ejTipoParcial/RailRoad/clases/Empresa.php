@@ -1,5 +1,5 @@
 <?php
-class Empresa {
+class Empresa implements JsonSerializable  {
     private $idEmpresa;
     private $nombreEmpresa;
     private $paisEmpresa;
@@ -18,6 +18,17 @@ class Empresa {
         $this->paisEmpresa = $paisEmpresa;
         $this->webEmpresa = $webEmpresa;
         $this->logoEmpresa = $logoEmpresa;
+    }
+
+    //Serializable
+    public function jsonSerialize(): mixed {
+        return [
+            'idEmpresa' => $this->idEmpresa,
+            'nombre'    => $this->nombreEmpresa,
+            'pais'      => $this->paisEmpresa,
+            'web'       => $this->webEmpresa,
+            'logo'      => $this->logoEmpresa,
+        ];
     }
 
 

@@ -1,5 +1,5 @@
 <?php
-class Servicio {
+class Servicio implements JsonSerializable{
     private $idServicio;
     private $nroServicio;
     private $ciudadOrigenServicio;
@@ -42,6 +42,23 @@ class Servicio {
         $this->empresa = null;
     }
 
+    //Serialiaze
+        public function jsonSerialize(): mixed {
+        return [
+            'idServicio' => $this->idServicio,
+            'nroServicio' => $this->nroServicio,
+            'ciudadOrigenServicio' => $this->ciudadOrigenServicio,
+            'ciudadDestinoServicio' => $this->ciudadDestinoServicio,
+            'estacionOrigenServicio' => $this->estacionOrigenServicio,
+            'estacionDestinoServicio' => $this->estacionDestinoServicio,
+            'horaSalidaServicio' => $this->horaSalidaServicio,
+            'horaLlegadaServicio' => $this->horaLlegadaServicio,
+            'frecuenciaServicio' => $this->frecuenciaServicio,
+            'precioServicio' => $this->precioServicio,
+            'idEmpresa' => $this->idEmpresa,
+            'empresa' => $this->empresa // PHP va a usar el jsonSerialize de Empresa automáticamente si implementa JsonSerializable
+        ];
+    }
 
 
     //Getters y setters
