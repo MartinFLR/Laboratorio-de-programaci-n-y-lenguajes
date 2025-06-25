@@ -4,7 +4,9 @@ session_start();
 
 header('Content-Type: application/json');
 
-$data = json_decode(file_get_contents('php://input'), true);
+// Recibir parámetros por GET en vez de leer JSON del body
+$ciudadOrigen = isset($_GET['ciudadOrigen']) ? trim($_GET['ciudadOrigen']) : null;
+$ciudadDestino = isset($_GET['ciudadDestino']) ? trim($_GET['ciudadDestino']) : null;
 
 if (!isset($_SESSION['gestor'])) {
     http_response_code(400);
@@ -12,7 +14,7 @@ if (!isset($_SESSION['gestor'])) {
     exit;
 }
 
-if (!isset($data['ciudadOrigen']) || !isset($data['ciudadDestino'])) {
+if ($ciudadOrigen === null || $ciudadDestino === null) {
     http_response_code(400);
     echo json_encode(['error' => 'No fueron enviados los filtros']);
     exit;
@@ -22,8 +24,7 @@ if (!isset($data['ciudadOrigen']) || !isset($data['ciudadDestino'])) {
 $gestor = $_SESSION['gestor'];
 
 /** @var Servicio[] */
-$servicios = $gestor->filtrar($data['ciudadOrigen'], $data['ciudadDestino']);
+$servicios = $gestor->filtrar($ciudadOrigen, $ciudadDestino);
 $_SESSION['gestor'] = $gestor;
-
 
 echo json_encode($servicios);

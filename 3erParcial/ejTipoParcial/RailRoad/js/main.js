@@ -13,6 +13,8 @@ function cargarCiudades() {
     if (xhr.status === 200) {
       try {
         const data = JSON.parse(xhr.responseText);
+        console.log("Respuesta parseada JSON:", data);
+
         llenarSelect("ciudadesOrigen", data.ciudadesOrigen);
         llenarSelect("ciudadesDestino", data.ciudadesDestino);
       } catch (e) {
@@ -30,6 +32,12 @@ function cargarCiudades() {
   xhr.send();
 }
 
+function configurarFiltros() {
+  ["ciudadesOrigen", "ciudadesDestino"].forEach((id) => {
+    document.getElementById(id).addEventListener("change", filtrar);
+  });
+}
+
 function llenarSelect(id, opciones) {
   const select = document.getElementById(id);
   opciones.forEach((op) => {
@@ -40,25 +48,24 @@ function llenarSelect(id, opciones) {
   });
 }
 
-function configurarFiltros() {
-  ["ciudadesOrigen", "ciudadesDestino"].forEach((id) => {
-    document.getElementById(id).addEventListener("change", filtrar);
-  });
-}
-
 function filtrar() {
   const origen = document.getElementById("ciudadesOrigen").value.trim();
   const destino = document.getElementById("ciudadesDestino").value.trim();
 
+  // Construir URL con parámetros codificados
+  const url = `api/buscarSegunFiltros.php?
+  ciudadOrigen=${encodeURIComponent(origen)}
+  &ciudadDestino=${encodeURIComponent(destino)}`;
+
   const xhr = new XMLHttpRequest();
-  xhr.open("POST", "api/buscarSegunFiltros.php", true);
-  xhr.withCredentials = true;
-  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.open("GET", url, true);
 
   xhr.onload = () => {
     if (xhr.status === 200) {
       try {
         const data = JSON.parse(xhr.responseText);
+        console.log("Respuesta parseada JSON:", data);
+
         if (Array.isArray(data) && data.length > 0) {
           mostrarServicios(data);
         } else {
@@ -73,13 +80,7 @@ function filtrar() {
       mostrarMensaje("Error al buscar servicios.");
     }
   };
-
-  xhr.onerror = () => {
-    console.error("Error de red en filtrar.");
-    mostrarMensaje("Error al buscar servicios.");
-  };
-
-  xhr.send(JSON.stringify({ ciudadOrigen: origen, ciudadDestino: destino }));
+  xhr.send();
 }
 
 function mostrarServicios(data) {
@@ -93,21 +94,21 @@ function mostrarServicios(data) {
     div.innerHTML = `
       <img src="${
         item.empresa?.logo || ""
-      }" alt="Logo" class="logo-empresa" data-index="${index}" style="height:60px; cursor:pointer;">
+      }"alt="Logo" class="logo-empresa" data-index="${index}" style="height:60px; cursor:pointer;">
       <br>
       <span class="ver-web" data-index="${index}" style="color:#06c; cursor:pointer; text-decoration:underline;">
         ${item.empresa?.web || ""}
       </span>
-      <p><strong>Empresa:</strong> ${
-        item.empresa?.nombre || "No disponible"
-      }</p>
+      <p><strong>Empresa:</strong> 
+      ${item.empresa?.nombre || "No disponible"}
+      </p>
       <p><strong>Nro Servicio:</strong> ${item.nroServicio}</p>
-      <p><strong>Origen:</strong> ${item.ciudadOrigenServicio} (${
-      item.estacionOrigenServicio
-    })</p>
-      <p><strong>Destino:</strong> ${item.ciudadDestinoServicio} (${
-      item.estacionDestinoServicio
-    })</p>
+      <p><strong>Origen:</strong> ${item.ciudadOrigenServicio}
+       (${item.estacionOrigenServicio})
+      </p>
+      <p><strong>Destino:</strong> ${item.ciudadDestinoServicio} 
+      (${item.estacionDestinoServicio})
+      </p>
       <p><strong>Salida:</strong> ${item.horaSalidaServicio}</p>
       <p><strong>Llegada:</strong> ${item.horaLlegadaServicio}</p>
       <p><strong>Precio:</strong> $${item.precioServicio}</p>
@@ -135,12 +136,12 @@ function mostrarDetalle(item, index) {
   const detalleDiv = document.getElementById(`detalle-${index}`);
 
   detalleDiv.innerHTML = `
-    <p><strong>Nombre Legal:</strong> ${
-      item.empresa?.nombre || "No disponible"
-    }</p>
-    <p><strong>Sitio Web:</strong> <a href="${
-      item.empresa?.web || "#"
-    }" target="_blank">${item.empresa?.web || "No disponible"}</a></p>
+    <p><strong>Nombre Legal:</strong> 
+    ${item.empresa?.nombre || "No disponible"}
+      </p>
+    <p><strong>Sitio Web:</strong> 
+    <a href="${item.empresa?.web || "#"}" target="_blank">
+    ${item.empresa?.web || "No disponible"}</a></p>
     <p><strong>País:</strong> ${item.empresa?.pais || "No disponible"}</p>
     <p><strong>Servicios de esta empresa:</strong></p>
     <div id="servicios-detalle-${index}">Cargando servicios...</div>
@@ -186,6 +187,7 @@ function obtenerServiciosEmpresa(idEmpresa, callback) {
     if (xhr.status === 200) {
       try {
         const data = JSON.parse(xhr.responseText);
+        console.log("Respuesta parseada JSON:", data);
         callback(data);
       } catch (e) {
         console.error("Error parseando servicios empresa:", e);
