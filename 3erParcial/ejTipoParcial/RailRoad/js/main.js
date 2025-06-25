@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   cargarCiudades();
   configurarFiltros();
-  filtrar(); // Carga datos al inicio
+  filtrar(); 
 });
 
 function cargarCiudades() {
@@ -53,9 +53,7 @@ function filtrar() {
   const destino = document.getElementById("ciudadesDestino").value.trim();
 
   // Construir URL con parámetros codificados
-  const url = `api/buscarSegunFiltros.php?
-  ciudadOrigen=${encodeURIComponent(origen)}
-  &ciudadDestino=${encodeURIComponent(destino)}`;
+  const url = `api/buscarSegunFiltros.php?ciudadOrigen=${encodeURIComponent(origen||"")}&ciudadDestino=${encodeURIComponent(destino||"")}`;
 
   const xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
