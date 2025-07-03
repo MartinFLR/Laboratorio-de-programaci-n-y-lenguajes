@@ -13,6 +13,167 @@ ORDER BY      -- ordenamiento
 LIMIT         -- cuántos resultados
 */
 
+//Si usás GROUP BY, todas las columnas del SELECT deben estar:
+//en el GROUP BY, o ser funciones de agregación como SUM(), AVG(), COUNT(), etc.
+
+/*Ejemplo que funciona:
+SELECT idProducto, COUNT(*) FROM precios GROUP BY idProducto;
+
+Ejemplo que da error:
+SELECT idProducto, precio FROM precios GROUP BY idProducto;
+
+Porque precio no está en GROUP BY ni está agregada (MAX(precio) sí serviría).
+*/
+
+//querys interesantes
+
+//1. MIN() y MAX(): Precio más bajo y más alto por producto
+    public static function getPreciosMinMaxPorProducto(): array {
+        $conn = Database::getConnection();
+        $sql = "
+            SELECT
+                p.nombre AS producto,
+                MIN(pr.precio) AS precio_min,
+                MAX(pr.precio) AS precio_max
+            FROM productos p
+            JOIN precios pr ON p.idProducto = pr.idProducto
+            GROUP BY p.idProducto, p.nombre
+        ";
+        $result = $conn->query($sql);
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+
+
+// AVG(): Precio promedio por producto
+public static function getPrecioPromedioPorProducto(): array {
+        $conn = Database::getConnection();
+        $sql = "
+            SELECT
+                p.nombre AS producto,
+                AVG(pr.precio) AS precio_promedio
+            FROM productos p
+            JOIN precios pr ON p.idProducto = pr.idProducto
+            GROUP BY p.idProducto, p.nombre
+        ";
+        $result = $conn->query($sql);
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+
+
+
+    //COUNT(): Cantidad de supermercados que venden cada producto
+        public static function getCantidadSupermercadosPorProducto(): array {
+        $conn = Database::getConnection();
+        $sql = "
+            SELECT
+                p.nombre AS producto,
+                COUNT(DISTINCT pr.idSupermercado) AS cantidad_supermercados
+            FROM productos p
+            JOIN precios pr ON p.idProducto = pr.idProducto
+            GROUP BY p.idProducto, p.nombre
+        ";
+        $result = $conn->query($sql);
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+
+// Diferencia entre precio máximo y mínimo por producto (usando subconsulta o CTE)
+    public static function getDiferenciaPrecioPorProducto(): array {
+        $conn = Database::getConnection();
+        $sql = "
+            SELECT
+                p.nombre AS producto,
+                MAX(pr.precio) - MIN(pr.precio) AS diferencia_precio
+            FROM productos p
+            JOIN precios pr ON p.idProducto = pr.idProducto
+            GROUP BY p.idProducto, p.nombre
+            ORDER BY diferencia_precio DESC
+        ";
+        $result = $conn->query($sql);
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+
+
+//Filtrado por rango de precio
+    public static function getProductosPorRangoPrecio(float $min, float $max): array {
+        $conn = Database::getConnection();
+        $sql = "
+            SELECT
+                p.nombre AS producto,
+                s.nombre AS supermercado,
+                pr.precio
+            FROM precios pr
+            JOIN productos p ON pr.idProducto = p.idProducto
+            JOIN supermercados s ON pr.idSupermercado = s.idSupermercado
+            WHERE pr.precio BETWEEN ? AND ?
+            ORDER BY pr.precio ASC
+        ";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("dd", $min, $max);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+
+
+// Paginación básica con LIMIT y OFFSET (Trae 10 filas empezando desde la fila 21)
+   public static function getProductosPaginados(int $limit, int $offset): array {
+        $conn = Database::getConnection();
+        $sql = "
+            SELECT
+                p.nombre AS producto,
+                s.nombre AS supermercado,
+                pr.precio
+            FROM precios pr
+            JOIN productos p ON pr.idProducto = p.idProducto
+            JOIN supermercados s ON pr.idSupermercado = s.idSupermercado
+            ORDER BY p.nombre ASC
+            LIMIT ? OFFSET ?
+        ";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ii", $limit, $offset);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+
+
+
+
+
+
+    public static function getSupermercadoConPrecioMinPorProducto(): array {
+        $conn = Database::getConnection();
+        $sql = "
+            SELECT
+                p.nombre AS producto,
+                s.nombre AS supermercado,
+                s.ubicacion,
+                pr.precio
+            FROM precios pr
+            JOIN productos p ON pr.idProducto = p.idProducto
+            JOIN supermercados s ON pr.idSupermercado = s.idSupermercado
+            WHERE pr.precio = (
+                SELECT MIN(precio)
+                FROM precios
+                WHERE idProducto = pr.idProducto
+            )
+            ORDER BY p.nombre
+        ";
+        $result = $conn->query($sql);
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+
+
+
+
+
 public static function buscarUltimasCreadas(int $limite) {
     $conn = Database::getConnection();
     $sql = "SELECT * FROM palabras ORDER BY fechaCreacion DESC LIMIT ?";
