@@ -24,6 +24,23 @@ class ArrayUtils {
     }
 
 
+    //Promedio de valores numéricos
+    public static function average(array $arr): float {
+    if (empty($arr)) return 0;
+    return array_sum($arr) / count($arr);
+}
+
+
+    public static function maxValue(array $arr) {
+        return empty($arr) ? null : max($arr);
+    }
+
+    public static function minValue(array $arr) {
+        return empty($arr) ? null : min($arr);
+    }
+
+
+
     //Agrupa elementos por un criterio dado, devolviendo un array con claves según el criterio. Muy útil para clasificar datos.
     public static function groupBy(array $arr, callable $callback): array {
         $result = [];
@@ -69,7 +86,8 @@ class ArrayUtils {
 
     // Devuelve el primer valor o null si está vacío
     public static function first(array $arr) {
-        return $arr[0] ?? null;
+    if (empty($arr)) return null;
+    return $arr[array_key_first($arr)];
     }
 
     // Devuelve el último valor o null si está vacío
