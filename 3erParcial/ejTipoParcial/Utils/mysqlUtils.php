@@ -1,6 +1,18 @@
 <?php
 class Database {
 
+/*
+SELECT        -- qué columnas
+FROM          -- de qué tabla
+JOIN          -- con qué otra tabla (opcional)
+ON            -- cómo se relacionan
+WHERE         -- filtros
+GROUP BY      -- agrupar
+HAVING        -- filtro sobre grupos
+ORDER BY      -- ordenamiento
+LIMIT         -- cuántos resultados
+*/
+
 public static function buscarUltimasCreadas(int $limite) {
     $conn = Database::getConnection();
     $sql = "SELECT * FROM palabras ORDER BY fechaCreacion DESC LIMIT ?";
@@ -77,6 +89,60 @@ public static function aumentarAcertadasPorCategoria(string $nombreCategoria): i
 }
 
 
+public static function obtenerProductoMasCaroPorCategoria(string $nombreCategoria): ?array {
+    $conn = Database::getConnection();
+    $sql = "SELECT p.nombre, p.precio 
+            FROM productos p
+            INNER JOIN categorias c ON p.idCategoria = c.idCategoria
+            WHERE c.nombre = ?
+            ORDER BY p.precio DESC
+            LIMIT 1";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $nombreCategoria);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    return $result->fetch_assoc() ?: null;
+}
+
+
+public static function obtenerUsuarioConMasAlertas(): ?array {
+    $conn = Database::getConnection();
+    $sql = "SELECT u.idUsuario, u.nombre, COUNT(a.idAlerta) AS total 
+            FROM usuarios u
+            JOIN alertas a ON u.idUsuario = a.idUsuario
+            GROUP BY u.idUsuario
+            ORDER BY total DESC
+            LIMIT 1";
+    $result = $conn->query($sql);
+
+    return $result->fetch_assoc() ?: null;
+}
+
+// Obtener y actualizar valor mínimo
+public static function marcarComoMasAntiguo(): bool {
+    $conn = Database::getConnection();
+    $sql = "UPDATE documentos 
+            SET esMasAntiguo = 1 
+            WHERE fecha = (SELECT MIN(fecha) FROM documentos)";
+    return $conn->query($sql);
+}
+
+
+
+public static function obtenerPuntajeMaximo(int $idUsuario): ?int {
+    $conn = Database::getConnection();
+    $sql = "SELECT MAX(puntaje) AS maximo FROM jugadas WHERE idUsuario = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $idUsuario);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    $row = $result->fetch_assoc();
+    return $row['maximo'] !== null ? (int)$row['maximo'] : null;
+}
+
+
 
 public static function editarPalabra(int $id, string $palabra, string $dificultad, int $acertada) {
     $conn = Database::getConnection();
@@ -88,6 +154,47 @@ public static function editarPalabra(int $id, string $palabra, string $dificulta
     $stmt->bind_param("ssii", $palabra, $dificultad, $acertada, $id);
     return $stmt->execute();
 }
+
+
+public static function editarPedidoConProductos(
+    int $idPedido,
+    string $estado,
+    array $productos // array de ['idProducto' => cantidad]
+): bool {
+    $conn = Database::getConnection();
+    $conn->begin_transaction();
+
+    try {
+        // Actualizar estado del pedido
+        $sqlPedido = "UPDATE pedidos SET estado = ? WHERE idPedido = ?";
+        $stmtPedido = $conn->prepare($sqlPedido);
+        $stmtPedido->bind_param("si", $estado, $idPedido);
+        $stmtPedido->execute();
+
+        // Eliminar productos anteriores
+        $sqlDelete = "DELETE FROM pedido_producto WHERE idPedido = ?";
+        $stmtDelete = $conn->prepare($sqlDelete);
+        $stmtDelete->bind_param("i", $idPedido);
+        $stmtDelete->execute();
+
+        // Insertar los nuevos productos
+        $sqlInsert = "INSERT INTO pedido_producto (idPedido, idProducto, cantidad) VALUES (?, ?, ?)";
+        $stmtInsert = $conn->prepare($sqlInsert);
+
+        foreach ($productos as $idProducto => $cantidad) {
+            $stmtInsert->bind_param("iii", $idPedido, $idProducto, $cantidad);
+            $stmtInsert->execute();
+        }
+
+        $conn->commit();
+        return true;
+
+    } catch (Exception $e) {
+        $conn->rollback();
+        throw new Exception("Error al editar pedido: " . $e->getMessage());
+    }
+}
+
 
 
 public static function eliminarPalabra(int $id) {

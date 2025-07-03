@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Consumidores Unidos</title>
+    <title>LabNro3</title>
 
     <link rel="stylesheet" href="styles.css" />
 </head>
@@ -14,19 +14,21 @@
         <div id="informacion"></div>  
 
         <h2>Filtros</h2>
-            <input
-            type="text"
-            id="producto"
-            placeholder="Ingrese el nombre del producto"
-            />
-            <<input
-            type="text"
-            id="ubicacion"
-            placeholder="Ingrese la ubicacion del producto"
-            />
 
-        <h2>Resultado</h2>
-        <div id="resultado"></div>
+        <input
+        type="text"
+        id="busquedaProducto"
+        placeholder="Ingrese el producto"
+      />
+
+      <input
+        type="text"
+        id="busquedaUbicacion"
+        placeholder="Ingrese la ubicacion"
+      />
+
+      <h2>Resultado</h2>
+      <div id="resultado"></div>
 
     </main>
 

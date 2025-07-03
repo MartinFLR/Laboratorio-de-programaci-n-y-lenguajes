@@ -1,67 +1,81 @@
 /* Reset básico */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
+  box-sizing: border-box;
 }
 
-/* Layout principal */
+/* Tipografía general */
 body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background-color: #f5f5f5;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f7fa;
   color: #333;
+  padding: 20px;
+  line-height: 1.6;
 }
 
-/* Header */
+/* Encabezado */
 header {
-  background-color: #003366;
+  background-color: #0077cc;
   color: white;
-  padding: 1rem;
+  padding: 20px;
+  border-radius: 8px;
   text-align: center;
+  margin-bottom: 30px;
 }
 
-/* Main */
+header h1 {
+  font-size: 28px;
+  letter-spacing: 1px;
+}
+
+/* Sección principal */
 main {
-  flex: 1;
-  padding: 2rem;
   max-width: 800px;
   margin: 0 auto;
 }
 
-main h2 {
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
-  color: #003366;
+/* Títulos */
+h2 {
+  color: #0077cc;
+  font-size: 20px;
+  margin-bottom: 10px;
+  margin-top: 30px;
 }
 
-/* Selects */
-select {
-  padding: 0.5rem;
-  margin-right: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 4px;
+/* Entradas de texto */
+input[type="text"] {
+  width: 100%;
+  max-width: 500px;
+  padding: 10px 12px;
+  margin-bottom: 15px;
   border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border 0.2s ease;
 }
 
-/* Contenedores de información y resultado */
+input[type="text"]:focus {
+  border-color: #0077cc;
+  outline: none;
+}
+
+/* Divs de contenido */
 #informacion,
 #resultado {
   background-color: white;
-  border: 1px solid #ccc;
-  padding: 1rem;
-  border-radius: 4px;
-  min-height: 60px;
-  margin-top: 0.5rem;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 6px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
 /* Footer */
 footer {
-  background-color: #003366;
-  color: white;
+  margin-top: 50px;
   text-align: center;
-  padding: 1rem;
-  margin-top: auto;
+  font-size: 14px;
+  color: #777;
+  border-top: 1px solid #ccc;
+  padding-top: 20px;
 }
