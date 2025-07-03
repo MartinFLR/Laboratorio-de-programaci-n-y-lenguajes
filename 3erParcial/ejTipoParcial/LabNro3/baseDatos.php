@@ -7,7 +7,7 @@ class Database {
             $host = 'localhost';
             $user = 'root';
             $pass = '';
-            $db = 'raileurope';
+            $db = 'comparador';
             self::$conn = new mysqli($host, $user, $pass, $db);
             if (self::$conn->connect_error) {
                 die("Error: " . self::$conn->connect_error);
