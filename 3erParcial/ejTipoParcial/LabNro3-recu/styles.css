@@ -1,0 +1,81 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Tipografía general */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+/* Encabezado */
+header {
+  background-color: #0077cc;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+header h1 {
+  font-size: 28px;
+  letter-spacing: 1px;
+}
+
+/* Sección principal */
+main {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Títulos */
+h2 {
+  color: #0077cc;
+  font-size: 20px;
+  margin-bottom: 10px;
+  margin-top: 30px;
+}
+
+/* Entradas de texto */
+input[type="text"] {
+  width: 100%;
+  max-width: 500px;
+  padding: 10px 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border 0.2s ease;
+}
+
+input[type="text"]:focus {
+  border-color: #0077cc;
+  outline: none;
+}
+
+/* Divs de contenido */
+#informacion,
+#resultado {
+  background-color: white;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 6px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+/* Footer */
+footer {
+  margin-top: 50px;
+  text-align: center;
+  font-size: 14px;
+  color: #777;
+  border-top: 1px solid #ccc;
+  padding-top: 20px;
+}

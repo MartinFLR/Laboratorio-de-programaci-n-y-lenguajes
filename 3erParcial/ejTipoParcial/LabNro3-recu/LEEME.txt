@@ -1,0 +1,3 @@
+Hola profesores
+Creo que hay un error de comillas o algo asi, probe de todas las formas y los dias no los busca bien
+Todo lo demas anda perfecto, es solo esa consulta de los dias.
